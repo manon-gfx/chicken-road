@@ -27,7 +27,9 @@ function _init()
  spawners={}
  add(spawners,{y=96,s=0.8,r=1.5,t=t(),ty="car"})
  add(spawners,{y=80,s=-0.7,r=1.5,t=t(),ty="car"})
- add(spawners,{y=72,s=-0.5,r=3.5,t=t(),ty="log"})
+ add(spawners,{y=64,s=-0.5,r=3.5,t=t(),ty="log"})
+ add(spawners,{y=56,s=0.5,r=3.5,t=t(),ty="log"})
+
  // prewarm spawners
  for i=1,#spawners do
   prewarm_spawner(spawners[i])
@@ -93,6 +95,15 @@ function _update()
  while i>0 do
   l=logs[i];
   l.x += l.s
+
+  pb={x=px,y=py,w=8,h=8}
+  lb={x=l.x+2,y=l.y,w=l.w*8-4,h=8}
+  if aabb_overlap(pb,lb) then
+   px=(px-l.x+4)\8*8+l.x
+
+   px=max(px,l.x)
+   px=min(px,l.x+l.w*8-8)
+  end
 
   // delete out of bounds logs
   if (l.s>0 and l.x>128) or
