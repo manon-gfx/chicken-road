@@ -2,7 +2,7 @@ pico-8 cartridge // http://www.pico-8.com
 version 41
 __lua__
 function prewarm_cl(cl)
- step=cl.s*30*cl.r
+ step=abs(cl.s)*30*cl.r
  it=128/step
  for i=0,it do
    ax=i*step
@@ -21,6 +21,7 @@ function _init()
  // spawn car lanes
  carlanes={}
  add(carlanes,{y=96,s=0.8,r=1.5,t=t()})
+ add(carlanes,{y=80,s=-0.7,r=1.5,t=t()})
  // prewarm car lanes with cars
  for i=1,#carlanes do
   prewarm_cl(carlanes[i])
@@ -90,7 +91,8 @@ function _draw()
  palt(0,false)
  palt(15,true)
  for i=1,#cars do
-  spr(2,cars[i].x,cars[i].y)
+  c=cars[i]
+  spr(2,c.x,c.y,1,1,c.s<0)
  end
  palt(0,true)
  palt(15,false)
