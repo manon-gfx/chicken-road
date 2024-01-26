@@ -2,11 +2,12 @@
 
 ## To Do
 - Map layout
+- Map rendering (Anne)
 - Environment art
 - Chicken animation 
-- Camera movement (Manon)
+- Camera movement (Anne)
 - Self-driving cars (Manon)
-- Sound effects 
+- Sound effects (Katelin)
 - Music (Katelin)
 - Dialogue
 - Opening screen
