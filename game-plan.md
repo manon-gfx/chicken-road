@@ -1,5 +1,17 @@
 # Why did the chicken cross the road?
 
+## To Do
+- Map layout
+- Environment art
+- Chicken animation 
+- Camera movement (Manon)
+- Self-driving cars (Manon)
+- Sound effects 
+- Music (Katelin)
+- Dialogue
+- Opening screen
+- Eindscherm 
+
 ## Map plan
 ### Start: 
 - green grass
