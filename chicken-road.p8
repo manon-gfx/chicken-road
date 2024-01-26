@@ -20,8 +20,8 @@ prints={}
 
 function _init()
  print("♥")
- pos=1 -- position in level
- px=64 -- x pixel in level
+ px=64
+ py=-16
  level=1
  dead=false
  cars={}
@@ -52,14 +52,14 @@ function _update()
  end
 
  if btnup() then
-  pos+=1
+  py-=8
  end
 
  if btndown() then
-  pos-=1
+  py+=8
  end
  
- py=get_py()
+	pos=py\8
 
  for i=1,#spawners do
   sp=spawners[i]
@@ -154,8 +154,11 @@ function _draw()
   cls(rnd(16))
  end
  
- for i=1,#prints do
-  print(prints[i])
+ if #prints>0 then
+  camera(0,0)
+  for i=1,#prints do
+   print(prints[i])
+  end
  end
 end
 
@@ -219,49 +222,34 @@ function get_lvl()
  return 0
 end
 
-function get_lvlpos()
- lvl=get_lvl()
- height=lvlheights[lvl]
- lvlpos=cumheights[lvl]-lvlheights[lvl]
- return height-pos-1
-end
-
-function get_py()
- return get_lvlpos()*8
-end
-
 function get_campos()
  lvl=get_lvl()
- lvlpos=get_lvlpos()
- height=lvlheighs[lvl]
- if lvlpos < 8 then
-  return height-viewheight
- elseif lvlpos < height-8 then
-  return lvlpos-8
+ height=lvlheights[lvl]
+ cumheight=cumheights[lvl]
+ relpos=pos-cumheight+height
+
+	prints[1]=relpos
+ if relpos > -8 then
+  prints[3]=1
+  campos=-viewheight
+ elseif relpos > 8-height then
+  prints[3]=2
+  campos=pos-8
  else
-  return 0
+  prints[3]=3
+  campos=-height
  end
+ prints[2]=campos
+ return campos
 end
 
 function update_camera()
- -- follow only after 4th row
- lvl=get_lvl()
- lvlpos=get_lvlpos()
- lvlheight=lvlheights[lvl]
- 
- prints[0]=lvlpos
- if lvlpos < 4 then
-  offset=0
- elseif lvlpos < lvlheight then
-  offset=lvlpos-4
- else
-  offset=lvlheight-lvlpos-viewheight
- end
- camera(0,offset*8)
+ campos=get_campos()
+ camera(0,campos*8)
 end
 
-function renderm_map()
- map()
+function render_map()
+ map(0,0)
 end
 __gfx__
 0000000000000000eeeeeeee44444444444444490000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
