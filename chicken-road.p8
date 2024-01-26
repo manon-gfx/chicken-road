@@ -58,8 +58,8 @@ function _update()
  if btndown() then
   py+=8
  end
- 
-	pos=py\8
+
+ pos=py\8
 
  for i=1,#spawners do
   sp=spawners[i]
@@ -153,7 +153,7 @@ function _draw()
  if dead==true then
   cls(rnd(16))
  end
- 
+
  if #prints>0 then
   camera(0,0)
   for i=1,#prints do
@@ -228,7 +228,7 @@ function get_campos()
  cumheight=cumheights[lvl]
  relpos=pos-cumheight+height
 
-	prints[1]=relpos
+ prints[1]=relpos
  if relpos > -8 then
   prints[3]=1
   campos=-viewheight
