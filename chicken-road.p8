@@ -10,7 +10,9 @@ function prewarm_spawner(sp)
    if sp.ty=="car" then
     add(cars,{x=ax,y=sp.y,s=sp.s})
    elseif sp.ty=="log" then
-    add(logs,{x=ax,y=sp.y,s=sp.s,w=flr(rnd(2))+2})
+    w=flr(rnd(2))+2
+    if sp.s>0 then ax-=w*8 end
+    add(logs,{x=ax,y=sp.y,s=sp.s,w=w})
    end
  end
 end
@@ -64,7 +66,9 @@ function _update()
    if sp.ty=="car" then
     add(cars,{x=x, y=sp.y, s=sp.s})
    elseif sp.ty=="log" then
-    add(logs,{x=x, y=sp.y, s=sp.s,w=flr(rnd(2))+2})
+    w=flr(rnd(2))+2
+    if sp.s>0 then x-=w*8 end
+    add(logs,{x=x, y=sp.y, s=sp.s,w=w})
    end
    sp.t+=sp.r //reset spawn timer
   end
