@@ -16,11 +16,13 @@ function prewarm_spawner(sp)
    end
  end
 end
+prints={}
 
 function _init()
  print("♥")
- px=64
- py=128-16
+ pos=1 -- position in level
+ px=64 -- x pixel in level
+ level=1
  dead=false
  cars={}
  logs={}
@@ -50,12 +52,14 @@ function _update()
  end
 
  if btnup() then
-  py-=8
+  pos+=1
  end
 
  if btndown() then
-  py+=8
+  pos-=1
  end
+ 
+ py=get_py()
 
  for i=1,#spawners do
   sp=spawners[i]
@@ -123,7 +127,9 @@ end
 
 function _draw()
  cls()
- map()
+ update_camera()
+ render_map()
+ spr(1,px,py)
 
  palt(0,false)
  palt(15,true)
@@ -146,6 +152,10 @@ function _draw()
 
  if dead==true then
   cls(rnd(16))
+ end
+ 
+ for i=1,#prints do
+  print(prints[i])
  end
 end
 
@@ -171,6 +181,7 @@ function trans_aabb(b, x, y)
    h=b.h
   }
 end
+
 function btnleft()
  return btn(⬅️) and not wasleft
 end
@@ -192,6 +203,65 @@ function wasbuttons()
  wasright=btn(➡️)
  wasup=btn(⬆️)
  wasdown=btn(⬇️)
+end
+
+-->8
+viewheight=16 --sprites
+lvlheights={24,16} -- sprites
+cumheights={24,40} -- sprites
+
+function get_lvl()
+ for lvl=1,#lvlheights do
+  if cumheights[lvl]>=pos then
+   return lvl
+  end
+ end
+ return 0
+end
+
+function get_lvlpos()
+ lvl=get_lvl()
+ height=lvlheights[lvl]
+ lvlpos=cumheights[lvl]-lvlheights[lvl]
+ return height-pos-1
+end
+
+function get_py()
+ return get_lvlpos()*8
+end
+
+function get_campos()
+ lvl=get_lvl()
+ lvlpos=get_lvlpos()
+ height=lvlheighs[lvl]
+ if lvlpos < 8 then
+  return height-viewheight
+ elseif lvlpos < height-8 then
+  return lvlpos-8
+ else
+  return 0
+ end
+end
+
+function update_camera()
+ -- follow only after 4th row
+ lvl=get_lvl()
+ lvlpos=get_lvlpos()
+ lvlheight=lvlheights[lvl]
+ 
+ prints[0]=lvlpos
+ if lvlpos < 4 then
+  offset=0
+ elseif lvlpos < lvlheight then
+  offset=lvlpos-4
+ else
+  offset=lvlheight-lvlpos-viewheight
+ end
+ camera(0,offset*8)
+end
+
+function renderm_map()
+ map()
 end
 __gfx__
 0000000000000000eeeeeeee44444444444444490000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
