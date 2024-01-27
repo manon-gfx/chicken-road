@@ -40,6 +40,9 @@ function _init()
   prewarm_spawner(spawners[i])
  end
 
+ update_pos()
+ oldcampos=get_campos()
+
  wasbuttons()
 end
 
@@ -64,7 +67,7 @@ function _update()
   pd=3
  end
 
- pos=py\8
+ update_pos()
 
  for i=1,#spawners do
   sp=spawners[i]
@@ -225,6 +228,10 @@ viewheight=16 --sprites
 lvlheights={24,16} -- sprites
 cumheights={24,40} -- sprites
 
+function update_pos()
+ pos=py\8
+end
+
 function get_lvl()
  for lvl=1,#lvlheights do
   if -cumheights[lvl]<=pos then
@@ -256,12 +263,19 @@ function get_campos()
   campos+=diff
  end
 
- return campos
+ return campos*8
 end
 
 function update_camera()
+ fac=0.2
+
  campos=get_campos()
- camera(0,campos*8)
+ diff=campos-oldcampos
+ smoothpos=oldcampos+fac*diff
+
+ camera(0,smoothpos)
+
+ oldcampos=smoothpos
 end
 
 function render_map()
@@ -277,7 +291,6 @@ function render_map()
  tileh=height
 
  map(tilex, tiley, sx, sy, tilew, tileh)
-
 end
 __gfx__
 fff77fffffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
