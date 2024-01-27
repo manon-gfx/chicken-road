@@ -49,25 +49,42 @@ function _init()
 end
 
 function _update()
+ pdx=0
+ pdy=0
  if btnleft() then
-  px-=8
+  pdx-=8
   pd=0
  end
 
  if btnright() then
-  px+=8
+  pdx+=8
   pd=1
  end
 
  if btnup() then
-  py-=8
+  pdy-=8
   pd=2
  end
 
  if btndown() then
-  py+=8
+  pdy+=8
   pd=3
  end
+
+ // player tilemap collsion
+ local targx=px+pdx
+ local targy=py+pdy
+ if fget(mget2(targx,targy),0) then
+  if pdy!=0 then
+   targy=((targy-pdy)\8)*8
+  end
+  if pdx!=0 then
+   targx=((targx-pdx)\8)*8
+  end
+ end
+
+ px=targx
+ py=targy
 
  update_pos()
 
@@ -284,6 +301,19 @@ function update_camera()
  camera(0,smoothpos)
 
  oldcampos=smoothpos
+end
+
+//mget with camera transform
+function mget2(x,y)
+ local lvl=get_lvl()
+ if lvl!=1 then
+  assert() // handle multiple levles
+ end
+ local height=lvlheights[lvl]
+
+ local tilex=x\8
+ local tiley=(y+height*8)\8
+ return mget(tilex,tiley)
 end
 
 function render_map()
