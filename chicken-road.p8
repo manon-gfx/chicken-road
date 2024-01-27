@@ -370,7 +370,7 @@ end
 
 function kill_player(reason)
  if reason=="splat" then
-  sfx(32,3)
+  sfx(35,3)
  elseif reason == "drowned" then
   sfx(32,3)
  end
@@ -510,6 +510,7 @@ function update_logs()
 
    if l.pcol != true then
     spawn_swirls(l.x+2,l.x+l.w*8,l.y)
+    sfx(33,3)
    end
    l.pcol=true
   else
@@ -535,6 +536,7 @@ function update_pads()
    px=lp.x
    if lp.pcol != true then
     spawn_swirls(lp.x+1,lp.x+7,lp.y)
+    sfx(34,3)
    end
    lp.pcol=true
   else
