@@ -227,7 +227,7 @@ cumheights={24,40} -- sprites
 
 function get_lvl()
  for lvl=1,#lvlheights do
-  if cumheights[lvl]>=pos then
+  if -cumheights[lvl]<=pos then
    return lvl
   end
  end
@@ -238,8 +238,7 @@ function get_campos()
  lvl=get_lvl()
  height=lvlheights[lvl]
  cumheight=cumheights[lvl]
- relpos=pos-cumheight+height
-
+ relpos=pos+height-cumheight
  if relpos > -8 then
   campos=-viewheight
  elseif relpos > 8-height then
