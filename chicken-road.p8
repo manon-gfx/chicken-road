@@ -65,6 +65,10 @@ function _update()
  update_pads()
  update_bubbles()
 
+ // clamp in screen bounds
+ px=max(0,px)
+ px=min(120,px)
+
  -- check if death occurs
  if not dead then
   check_death()
