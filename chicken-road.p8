@@ -53,11 +53,14 @@ function _init()
 end
 
 function _update()
- if dialoguemode then
-  next_dialogue()
- elseif not dead then
+ if allowinput() then
   player_movement()
  end
+
+ if dialoguemode then
+  next_dialogue()
+ end
+
  update_pos()
 
  update_spawners()
@@ -549,6 +552,18 @@ function update_bubbles()
    deli(bubbles,i)
   end
   i-=1
+ end
+end
+
+function allowinput()
+ if dead then
+  return false
+ elseif dialoguemode then
+  return false
+ elseif t()<2 then
+  return false
+ else
+  return true
  end
 end
 -->8
