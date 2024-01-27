@@ -34,7 +34,7 @@ function _init()
 
  init_cumheights()
 
- add(pads, {x=32,y=-64})
+ add(pads, {x=32,y=-56})
 
  // spawn spawners
  spawners={}
@@ -61,6 +61,7 @@ function _update()
  update_spawners()
  update_cars()
  update_logs()
+ update_pads()
 
  -- check if death occurs
  check_death()
@@ -362,7 +363,7 @@ end
 function update_logs()
  i=#logs
  while i>0 do
-  l=logs[i];
+  local l=logs[i];
   l.x += l.s
 
   pb={x=px,y=py,w=8,h=8}
@@ -389,6 +390,24 @@ function update_logs()
   end
 
   i-=1
+ end
+end
+
+function update_pads()
+ for lp in all(pads) do
+  pb={x=px,y=py,w=8,h=8}
+  lpb={x=lp.x,y=lp.y,w=8,h=8}
+
+  if aabb_overlap(pb,lpb) then
+   px=lp.x
+   if lp.pcol != true then
+    add(swirls, {x=lp.x+1,y=lp.y,s=-0.5,t=t()})
+    add(swirls, {x=lp.x+7,y=lp.y,s=0.5,t=t()})
+   end
+   lp.pcol=true
+  else
+   lp.pcol=false
+  end
  end
 end
 -->8
@@ -491,9 +510,12 @@ end
 
 function draw_pads()
  for p in all(pads) do
-  spr(5,p.x,p.y)
+  local sy=p.y
+  if p.pcol then sy+=1 end
+  spr(5,p.x,sy)
  end
 end
+
 __gfx__
 fff77fffffffffffffffffffffffffffffffffffffffffff00666600000000000000000000000000000000000000000000000000000000000000000000777700
 fff7799ffff77ffff00ff00f444444444444449ffbbffbbf06000060000000000000000000000000000000000000000000000000000000000000000000070700
