@@ -625,7 +625,7 @@ end
 -->8
 -- dialogue voice
 
--- initiate or reset sound 
+-- initiate or reset sound
 -- variables
 function init_voice()
  tstart=t()
@@ -635,41 +635,41 @@ end
 
 -- dialogue sound update logic
 function sfx_voice_update()
-	if t() - tstart > tsfx then
-	 if wascons then
-	 	wascons=false
-	 	if rnd(1) > 0.8 then
-	 		sfx_emph()
-	 		tsfx=(10/120)
-	 	else
-	 		sfx_vowel()
-	 		tsfx=(14/120)
-	 	end
-	 else
-	 	wascons=true
-	 	sfx_cons()
-	 	tsfx=(26/120)
-	 end
-	 tstart=t()
-	end
+ if t() - tstart > tsfx then
+  if wascons then
+   wascons=false
+   if rnd(1) > 0.8 then
+    sfx_emph()
+    tsfx=(10/120)
+   else
+    sfx_vowel()
+    tsfx=(14/120)
+   end
+  else
+   wascons=true
+   sfx_cons()
+   tsfx=(26/120)
+  end
+  tstart=t()
+ end
 end
 
 -- play random consonant
 function sfx_cons()
-	local i = flr(rnd(4)) + 21
-	sfx(i, 3, 0, 8)
+ local i = flr(rnd(4)) + 21
+ sfx(i, 3, 0, 8)
 end
 
 -- play random vowel
 function sfx_vowel()
-	local i = flr(rnd(4)) + 25
-	sfx(i, 3, 0, 12)
+ local i = flr(rnd(4)) + 25
+ sfx(i, 3, 0, 12)
 end
 
 -- play random emphasized vowel
 function sfx_emph()
-	local i = flr(rnd(2)) + 29
-	sfx(i, 3, 0, 24)
+ local i = flr(rnd(2)) + 29
+ sfx(i, 3, 0, 24)
 end
 __gfx__
 fff77fffffffffffffffffffffffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000000000000000000000777700
