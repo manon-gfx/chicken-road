@@ -11,6 +11,7 @@ function _init()
  died_how=""
  died_t=0
  dialoguemode=false
+ opening_done=false
  cars={}
  logs={}
  pads={}
@@ -603,9 +604,17 @@ function del_dialogue()
  end
 end
 
+-- add dialogue card
+function add_dialogue(pos,txt)
+ tbl={pos=pos,txt=txt}
+ add(dialogue,tbl)
+end
+
 -- render first dialogue card
 -- for current position (if any)
 function draw_dialogue()
+ handle_opening_dialogue()
+
  txt=get_dialogue()
  if #txt>0 then
   if not dialoguemode then
@@ -676,6 +685,22 @@ function next_dialogue()
     or btno() or btnx() then
    del_dialogue()
    dialoguemode=false
+  end
+ end
+end
+
+-- add opening dialogue only once
+function handle_opening_dialogue()
+ if not opening_done then
+  if t()>1.5 then
+   txt={
+    "\"good morning,\n my little chicklet\" ♥",
+    "\"you can use ⬅️➡️⬆️⬇️ to     \nhave fun in the garden\"",
+    "\"but whatever you do...\"",
+    "\"do not cross the road!\"",
+   }
+   add_dialogue(pos,txt)
+   opening_done=true
   end
  end
 end
