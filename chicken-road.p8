@@ -25,8 +25,18 @@ function _init()
  spawners={}
  add(spawners,{y=-96,s=0.8,r=2.5,t=t(),ty="car"})
  add(spawners,{y=-88,s=-0.7,r=2.5,t=t(),ty="car"})
+ add(spawners,{y=-17*8,s=0.8,r=3,t=t(),ty="car"})
  add(spawners,{y=-19*8,s=0.5,r=3.5,t=t(),ty="log"})
--- add(spawners,{y=-72,s=0.5,r=3.5,t=t(),ty="log"})
+ add(spawners,{y=-21*8,s=0.8,r=3,t=t(),ty="car"})
+ add(spawners,{y=-22*8,s=1.0,r=2,t=t(),ty="car"})
+ add(spawners,{y=-24*8,s=-0.9,r=3,t=t(),ty="car"})
+ add(spawners,{y=-25*8,s=-1.2,r=2.5,t=t(),ty="car"})
+ add(spawners,{y=-27*8,s=-1.0,r=2.5,t=t(),ty="log"})
+ add(spawners,{y=-28*8,s=1.0,r=4,t=t(),ty="log"})
+ add(spawners,{y=-29*8,s=-1.2,r=3,t=t(),ty="log"})
+ add(spawners,{y=-31*8,s=-1.2,r=2,t=t(),ty="car"})
+ add(spawners,{y=-32*8,s=1.2,r=3,t=t(),ty="log"})
+ add(spawners,{y=-33*8,s=-1.5,r=2,t=t(),ty="car"})
 
  // prewarm spawners
  for i=1,#spawners do
