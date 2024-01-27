@@ -286,8 +286,6 @@ function mget2(x,y)
  local height=cumheights[lvl]
  local tilex=((lvl-1)*16)+x\8
  local tiley=(y+height*8)\8
- add(prints,tilex)
- add(prints,tiley)
  return mget(tilex,tiley)
 end
 
