@@ -32,8 +32,8 @@ function _init()
  add(spawners,{y=-24*8,s=-0.9,r=3,t=t(),ty="car"})
  add(spawners,{y=-25*8,s=-1.2,r=2.5,t=t(),ty="car"})
  add(spawners,{y=-27*8,s=-1.0,r=2.5,t=t(),ty="log"})
- add(spawners,{y=-28*8,s=1.0,r=4,t=t(),ty="log"})
- add(spawners,{y=-29*8,s=-1.2,r=3,t=t(),ty="log"})
+ spawn_pads(-28*8,0x318c)
+ add(spawners,{y=-29*8,s=1.2,r=3,t=t(),ty="log"})
  add(spawners,{y=-31*8,s=-1.2,r=2,t=t(),ty="car"})
  add(spawners,{y=-32*8,s=1.2,r=3,t=t(),ty="log"})
  add(spawners,{y=-33*8,s=-1.5,r=2,t=t(),ty="car"})
@@ -349,6 +349,14 @@ function check_death()
 
  if on_deadly then
   dead = true
+ end
+end
+
+function spawn_pads(y,mask)
+ for i=0,15 do
+  if band(lshr(mask,15-i),1)==1 then
+   add(pads, {x=i*8,y=y})
+  end
  end
 end
 
