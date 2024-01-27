@@ -9,6 +9,7 @@ function _init()
  level=1
  dead=false
  died_how=""
+ died_t=0
  dialoguemode=false
  cars={}
  logs={}
@@ -74,13 +75,23 @@ function _update()
   check_death()
  end
 
- -- spawn bubbles if drowned
- if dead and
-    died_how=="drowned" then
-    if t()-bubble_time > 0.3 then
-     bubble_time=t()
-     add(bubbles,{x=rnd(8),y=7-rnd(6),t=t()})
-    end
+ if dead then
+  -- spawn bubbles if drowned
+  if died_how=="drowned" then
+   if t()-bubble_time > 0.3 then
+    bubble_time=t()
+    add(bubbles,{x=rnd(8),y=7-rnd(6),t=t()})
+   end
+  end
+
+  if t()-died_t>1.5 then
+   bubbles={}
+   px=64
+   py=-16
+   dead=false
+   died_how=""
+   died_t=0
+  end
  end
 
  wasbuttons()
@@ -346,15 +357,25 @@ function player_movement()
  py=targy
 end
 
+function kill_player(reason)
+ if reason=="splat" then
+  sfx(32,3)
+ elseif reason == "drowned" then
+  sfx(32,3)
+ end
+
+ dead=true
+ died_t=t()
+ died_how=reason
+end
+
 function check_death()
  -- car collision
  for c in all(cars) do
   pb={x=px+2,y=py,w=4,h=8}
   cb={x=c.x,y=c.y,w=8,h=8}
   if aabb_overlap(pb,cb) then
-   dead=true
-   died_how="splat"
-   sfx(32,3)
+   kill_player("splat")
   end
  end
 
@@ -380,12 +401,13 @@ function check_death()
  end
 
  if on_deadly then
-  dead = true
+  local reason=""
   if cur_tile==66 then
-   died_how="drowned"
-   spawn_swirls(px+1,px+7,py)
+   reason="drowned"
+  else
+   assert() //unknown reason
   end
-  sfx(32,3)
+  kill_player(reason)
  end
 end
 
