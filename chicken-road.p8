@@ -77,7 +77,6 @@ function _draw()
  palt(15,true)
  draw_spawners()
  draw_swirls()
- draw_cars()
  draw_logs()
  draw_pads()
 
@@ -88,6 +87,8 @@ function _draw()
  end
  sp+=(t()*4)%2
  spr(sp,px,py-1,1,1,pd==0)
+
+ draw_cars()
 
  if dead==true then
   cls(rnd(16))
