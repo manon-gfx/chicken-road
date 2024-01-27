@@ -598,7 +598,7 @@ function draw_dialogue()
   end
 
   local midh=(bl+(br-bl)/2)
-  local midv=(bt+(bb-bt)/2)
+  local midv=(bt+(bb-bt)/2)-16
   for i,l in ipairs(lines) do
    local tl=midv+8*(i-#lines/2)-5
    local ll=midh-2*#l+1
