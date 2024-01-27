@@ -28,10 +28,10 @@ function _init()
 
  // spawn spawners
  spawners={}
- add(spawners,{y=96,s=0.8,r=1.5,t=t(),ty="car"})
- add(spawners,{y=80,s=-0.7,r=1.5,t=t(),ty="car"})
- add(spawners,{y=64,s=-0.5,r=3.5,t=t(),ty="log"})
- add(spawners,{y=56,s=0.5,r=3.5,t=t(),ty="log"})
+ add(spawners,{y=-32,s=0.8,r=1.5,t=t(),ty="car"})
+ add(spawners,{y=-48,s=-0.7,r=1.5,t=t(),ty="car"})
+ add(spawners,{y=-64,s=-0.5,r=3.5,t=t(),ty="log"})
+ add(spawners,{y=-72,s=0.5,r=3.5,t=t(),ty="log"})
 
  // prewarm spawners
  for i=1,#spawners do
