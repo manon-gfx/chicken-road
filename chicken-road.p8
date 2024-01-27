@@ -184,12 +184,12 @@ function _draw()
  palt(0,true)
  palt(15,false)
 
- if #prints>0 then
-  camera(0,0)
-  for i=1,#prints do
-   print(prints[i])
-  end
+
+ camera(0,0)
+ for i=1,#prints do
+  print(prints[i])
  end
+ prints={}
 end
 
 -->8
