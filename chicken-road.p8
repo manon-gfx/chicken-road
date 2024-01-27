@@ -49,43 +49,7 @@ function _init()
 end
 
 function _update()
- pdx=0
- pdy=0
- if btnleft() then
-  pdx-=8
-  pd=0
- end
-
- if btnright() then
-  pdx+=8
-  pd=1
- end
-
- if btnup() then
-  pdy-=8
-  pd=2
- end
-
- if btndown() then
-  pdy+=8
-  pd=3
- end
-
- // player tilemap collsion
- local targx=px+pdx
- local targy=py+pdy
- if fget(mget2(targx,targy),0) then
-  if pdy!=0 then
-   targy=((targy-pdy)\8)*8
-  end
-  if pdx!=0 then
-   targx=((targx-pdx)\8)*8
-  end
- end
-
- px=targx
- py=targy
-
+ player_movement()
  update_pos()
 
  for i=1,#spawners do
@@ -193,6 +157,8 @@ function _draw()
 end
 
 -->8
+-- helper functions --
+
 -- test overlap between bounding
 -- boxes
 function aabb_overlap(b0, b1)
@@ -331,7 +297,47 @@ function render_map()
  map(tilex, tiley, sx, sy, tilew, tileh)
 end
 -->8
--- all collision/death stuff --
+-- gameplay code --
+
+function player_movement()
+ local dx=0
+ local dy=0
+ if btnleft() then
+  dx-=8
+  pd=0
+ end
+
+ if btnright() then
+  dx+=8
+  pd=1
+ end
+
+ if btnup() then
+  dy-=8
+  pd=2
+ end
+
+ if btndown() then
+  dy+=8
+  pd=3
+ end
+
+ // player tilemap collsion
+ local targx=px+dx
+ local targy=py+dy
+ if fget(mget2(targx,targy),0) then
+  if dy!=0 then
+   targy=((targy-dy)\8)*8
+  end
+  if pdx!=0 then
+   targx=((targx-dx)\8)*8
+  end
+ end
+
+ px=targx
+ py=targy
+end
+
 function check_death()
  -- get player bounding box
  pb={x=px,y=py,w=8,h=8}
