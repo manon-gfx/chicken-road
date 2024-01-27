@@ -325,12 +325,32 @@ function player_movement()
  // player tilemap collsion
  local targx=px+dx
  local targy=py+dy
- if fget(mget2(targx,targy),0) then
-  if dy!=0 then
-   targy=((targy-dy)\8)*8
+ local samplex=targx
+ local sampley=targy
+
+ if dx!=0 then
+  if dx>0 then samplex+=7 end
+  c0=fget(mget2(samplex,py),0)
+  c1=fget(mget2(samplex,py+7),0)
+  if c0 or c1 then
+   if dx>0 then
+    targx=(samplex-8)\8*8
+   else
+    targx=(samplex+8)\8*8
+   end
   end
-  if pdx!=0 then
-   targx=((targx-dx)\8)*8
+ end
+
+ if dy!=0 then
+  if dy>0 then sampley+=7 end
+  c0=fget(mget2(targx,sampley),0)
+  c1=fget(mget2(targx+7,sampley),0)
+  if c0 or c1 then
+   if dy>0 then
+    targy=(sampley-8)\8*8
+   else
+    targy=(sampley+8)\8*8
+   end
   end
  end
 
