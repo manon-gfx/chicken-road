@@ -317,11 +317,9 @@ function player_movement()
 end
 
 function check_death()
- -- get player bounding box
- pb={x=px,y=py,w=8,h=8}
-
  -- car collision
  for c in all(cars) do
+  pb={x=px+2,y=py,w=4,h=8}
   cb={x=c.x,y=c.y,w=8,h=8}
   if aabb_overlap(pb,cb) then
    dead=true
@@ -330,6 +328,7 @@ function check_death()
 
  -- log collision
  for l in all(logs) do
+  pb={x=px,y=py,w=8,h=8}
   lb={x=l.x,y=l.y,w=l.w*8,h=8}
   if aabb_overlap(pb,lb) then
    dead=false
