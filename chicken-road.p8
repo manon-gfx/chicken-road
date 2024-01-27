@@ -235,17 +235,27 @@ function get_lvl()
 end
 
 function get_campos()
+ offset=8 -- distance chicken from screen bottom
+
+ -- usual position (middle of level)
+ campos=pos-offset
+
+ -- get relative position from lvl bottom
  lvl=get_lvl()
  height=lvlheights[lvl]
  cumheight=cumheights[lvl]
- relpos=pos+height-cumheight
- if relpos > -8 then
-  campos=-viewheight
- elseif relpos > 8-height then
-  campos=pos-8
- else
-  campos=-height
+ relpos=-(pos+cumheight-height)
+
+ if relpos < offset then
+  -- correct at start of level
+  diff=offset-relpos
+  campos-=diff
+ elseif relpos > height-offset then
+  -- correct at end of level
+  diff=relpos-(height-offset)
+  campos+=diff
  end
+
  return campos
 end
 
@@ -259,8 +269,8 @@ function render_map()
  height=lvlheights[lvl]
  cumheight=cumheights[lvl]
 
- tilex=0
- tiley=16*(lvl-1)
+ tilex=16*(lvl-1)
+ tiley=0
  sx=0
  sy=-cumheight*8
  tilew=16
