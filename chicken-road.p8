@@ -1,6 +1,70 @@
 pico-8 cartridge // http://www.pico-8.com
 version 41
 __lua__
+
+function car_spawner(l,s,r)
+ add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="car"})
+end
+function log_spawner(l,s,r)
+ add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="log"})
+end
+
+function init_lvl1()
+ local base=0
+
+ car_spawner(base+11,-0.7,2.5)
+ car_spawner(base+12,0.8,2.5)
+
+ car_spawner(base+17,0.8,3)
+
+ log_spawner(base+19,0.5,3.5)
+
+ car_spawner(base+21,0.8,3)
+ car_spawner(base+22,1.0,2)
+ car_spawner(base+24,-0.9,3)
+ car_spawner(base+25,-1.2,2.5)
+
+ log_spawner(base+27,-1.0,2.5)
+ spawn_pads(-28*8,0x318c)
+ log_spawner(base+29,1.2,3)
+
+ car_spawner(base+31,-1.2,2)
+ log_spawner(base+32,1.2,3)
+ car_spawner(base+33,-1.5,2)
+end
+
+function init_lvl2()
+ local base=cumheights[1]
+ car_spawner(base+5,0.8,2.5)
+ car_spawner(base+6,0.8,2.5)
+ car_spawner(base+7,0.8,2.5)
+
+ log_spawner(base+19,0.8,2.5)
+ log_spawner(base+20,0.8,2.5)
+
+ car_spawner(base+26,0.8,2.5)
+ car_spawner(base+27,0.8,2.5)
+
+ car_spawner(base+34,0.8,2.5)
+ car_spawner(base+35,0.8,2.5)
+ car_spawner(base+36,0.8,2.5)
+ car_spawner(base+37,0.8,2.5)
+
+ car_spawner(base+40,0.8,2.5)
+ car_spawner(base+41,0.8,2.5)
+ car_spawner(base+42,0.8,2.5)
+ car_spawner(base+43,0.8,2.5)
+ car_spawner(base+44,0.8,2.5)
+ car_spawner(base+45,0.8,2.5)
+
+ car_spawner(base+48,0.8,2.5)
+ car_spawner(base+49,0.8,2.5)
+ log_spawner(base+50,0.8,2.5)
+ log_spawner(base+51,0.8,2.5)
+ car_spawner(base+52,0.8,2.5)
+ car_spawner(base+53,0.8,2.5)
+end
+
 function _init()
  print("♥")
  px=64
@@ -28,21 +92,8 @@ function _init()
 
  // spawn spawners
  spawners={}
- add(spawners,{y=-96,s=0.8,r=2.5,t=t(),ty="car"})
- add(spawners,{y=-88,s=-0.7,r=2.5,t=t(),ty="car"})
- add(spawners,{y=-17*8,s=0.8,r=3,t=t(),ty="car"})
- add(spawners,{y=-19*8,s=0.5,r=3.5,t=t(),ty="log"})
- add(spawners,{y=-21*8,s=0.8,r=3,t=t(),ty="car"})
- add(spawners,{y=-22*8,s=1.0,r=2,t=t(),ty="car"})
- add(spawners,{y=-24*8,s=-0.9,r=3,t=t(),ty="car"})
- add(spawners,{y=-25*8,s=-1.2,r=2.5,t=t(),ty="car"})
- add(spawners,{y=-27*8,s=-1.0,r=2.5,t=t(),ty="log"})
- spawn_pads(-28*8,0x318c)
- add(spawners,{y=-29*8,s=1.2,r=3,t=t(),ty="log"})
- add(spawners,{y=-31*8,s=-1.2,r=2,t=t(),ty="car"})
- add(spawners,{y=-32*8,s=1.2,r=3,t=t(),ty="log"})
- add(spawners,{y=-33*8,s=-1.5,r=2,t=t(),ty="car"})
-
+ init_lvl1()
+ init_lvl2()
  // prewarm spawners
  for s in all(spawners) do
   prewarm_spawner(s)
@@ -228,7 +279,7 @@ end
 -- all map and camera stuff --
 
 viewheight=16
-lvlheights={36,64}
+lvlheights={36,64,64,64}
 cumheights={}
 
 function init_cumheights()
