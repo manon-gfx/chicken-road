@@ -39,8 +39,8 @@ function _init()
  add(spawners,{y=-33*8,s=-1.5,r=2,t=t(),ty="car"})
 
  // prewarm spawners
- for i=1,#spawners do
-  prewarm_spawner(spawners[i])
+ for s in all(spawners) do
+  prewarm_spawner(s)
  end
 
  update_pos()
