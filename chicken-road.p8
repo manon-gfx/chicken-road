@@ -432,6 +432,7 @@ dialogue={
  {pos=-15,txt={"\"why would you\n cross the road?\"","\"what could possibly\n be worth such dangers?\""}},
 }
 
+-- gets dialogue for current pos
 function get_dialogue()
  for dial in all(dialogue) do
   if pos==dial.pos then
@@ -441,6 +442,7 @@ function get_dialogue()
  return {}
 end
 
+-- delete current dialogue card
 function del_dialogue()
  for dial in all(dialogue) do
   if pos==dial.pos then
@@ -450,6 +452,8 @@ function del_dialogue()
  end
 end
 
+-- render first dialogue card
+-- for current position (if any)
 function draw_dialogue()
  txt=get_dialogue()
  if #txt>0 then
@@ -477,14 +481,16 @@ function draw_dialogue()
 
   local midh=(bl+(br-bl)/2)
   local midv=(bt+(bb-bt)/2)
-  for j,l in ipairs(lines) do
-   local tl=midv+8*(j-#lines/2)-5
+  for i,l in ipairs(lines) do
+   local tl=midv+8*(i-#lines/2)-5
    local ll=midh-2*#l+1
    print(l,ll,tl,7)
   end
  end
 end
 
+-- player input to go to next
+-- dialogue card
 function next_dialogue()
  local tdiff=0.5
  if t()-tdialstart>tdiff then
