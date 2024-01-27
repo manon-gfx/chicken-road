@@ -604,6 +604,10 @@ function draw_dialogue()
    local ll=midh-2*#l+1
    print(l,ll,tl,7)
   end
+
+  if t()-tdialstart>0.5 then
+   print("continue ➡️",70,84+sin(t()))
+  end
  end
 end
 
