@@ -78,10 +78,7 @@ function _draw()
  draw_swirls()
  draw_cars()
  draw_logs()
-
- for p in all(pads) do
-  spr(5,p.x,p.y)
- end
+ draw_pads()
 
  //player
  sp=0
@@ -489,6 +486,12 @@ function draw_logs()
    if l.pcol then sy+=1 end
    spr(s,l.x+(i-1)*8,sy,1,1,i==1)
   end
+ end
+end
+
+function draw_pads()
+ for p in all(pads) do
+  spr(5,p.x,p.y)
  end
 end
 __gfx__
