@@ -18,6 +18,7 @@ function _init()
  prints={}
  bubbles={}
  bubble_time=0
+ bottom_level_bound=-8
 
  music(0)
 
@@ -61,8 +62,6 @@ function _update()
   next_dialogue()
  end
 
- update_pos()
-
  update_spawners()
  update_cars()
  update_logs()
@@ -72,6 +71,9 @@ function _update()
  // clamp in screen bounds
  px=max(0,px)
  px=min(120,px)
+ py=min(bottom_level_bound,py)
+
+ update_pos()
 
  -- check if death occurs
  if not dead then
@@ -95,6 +97,12 @@ function _update()
    died_how=""
    died_t=0
   end
+ end
+
+ // update bottom bound
+ local lvl=get_lvl()
+ if lvl>1 then
+  bottom_level_bound=-cumheights[lvl-1]*8-8
  end
 
  wasbuttons()
