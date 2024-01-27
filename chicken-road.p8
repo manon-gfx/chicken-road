@@ -34,8 +34,8 @@ function _init()
  spawners={}
  add(spawners,{y=-96,s=0.8,r=2.5,t=t(),ty="car"})
  add(spawners,{y=-88,s=-0.7,r=2.5,t=t(),ty="car"})
- //add(spawners,{y=-64,s=-0.5,r=3.5,t=t(),ty="log"})
- //add(spawners,{y=-72,s=0.5,r=3.5,t=t(),ty="log"})
+ add(spawners,{y=-19*8,s=-0.5,r=3.5,t=t(),ty="log"})
+-- add(spawners,{y=-72,s=0.5,r=3.5,t=t(),ty="log"})
 
  // prewarm spawners
  for i=1,#spawners do
@@ -93,13 +93,6 @@ function _update()
   c=cars[i];
   c.x += c.s
 
-  // player collision
-  pb={x=px,y=py,w=8,h=8}
-  cb={x=c.x,y=c.y,w=8,h=8}
-  if aabb_overlap(pb,cb) then
-   dead=true
-  end
-
   // delete out of bounds cars
   if (c.s>0 and c.x>136) or
      (c.s<0 and c.x<-8) then
@@ -131,6 +124,9 @@ function _update()
 
   i-=1
  end
+
+ -- check if death occurs
+ check_death()
 
  wasbuttons()
 end
@@ -226,9 +222,11 @@ function wasbuttons()
 end
 
 -->8
-viewheight=16 --sprites
-lvlheights={36,16} -- sprites
-cumheights={} -- sprites
+-- all map and camera stuff --
+
+viewheight=16
+lvlheights={36,16}
+cumheights={}
 
 function init_cumheights()
  cum=0
@@ -301,6 +299,28 @@ function render_map()
  tileh=height
 
  map(tilex, tiley, sx, sy, tilew, tileh)
+end
+-->8
+-- all collision/death stuff --
+function check_death()
+ -- get player bounding box
+ pb={x=px,y=py,w=8,h=8}
+
+ -- car collision
+ for c in all(cars) do
+  cb={x=c.x,y=c.y,w=8,h=8}
+  if aabb_overlap(pb,cb) then
+   dead=true
+  end
+ end
+
+ -- log collision
+ for l in all(logs) do
+  lb={x=l.x,y=l.y,w=l.w*8,h=8}
+  if aabb_overlap(pb,lb) then
+   dead=false
+  end
+ end
 end
 __gfx__
 fff77fffffffffffffffffffffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
