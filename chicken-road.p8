@@ -72,6 +72,7 @@ function _init()
  pd=1
  level=1
  dead=false
+ deaths=0
  died_how=""
  died_t=0
  dialoguemode=false
@@ -146,6 +147,7 @@ function _update()
    px=64
    py=-16
    dead=false
+   deaths+=1
    died_how=""
    died_t=0
   end
@@ -647,16 +649,20 @@ end
 
 -- delete current dialogue card
 function del_dialogue()
- for dial in all(dialogue) do
+ for i,dial in ipairs(dialogue) do
   if pos==dial.pos then
    deli(dial.txt,1)
    tdialstart=nil
+   if #dial.txt==0 then
+    deli(dialogue,i)
+   end
+   return
   end
  end
 end
 
 -- add dialogue card
-function add_dialogue(pos,txt)
+function add_dialogue(txt)
  tbl={pos=pos,txt=txt}
  add(dialogue,tbl)
 end
@@ -664,9 +670,10 @@ end
 -- render first dialogue card
 -- for current position (if any)
 function draw_dialogue()
- handle_opening_dialogue()
+ optional_dialogue()
 
  txt=get_dialogue()
+
  if #txt>0 then
   if not dialoguemode then
    dialogue_t0=t()
@@ -681,7 +688,6 @@ function draw_dialogue()
   local bb=128-bt-1
 
   camera(0,0)
---  cls(0)
   rectfill(bl,bt,br,bb,0)
   rect(bl+1,bt+1,br-1,bb-1,7)
   spr(15,bl-2,bt-2,1,1,true,false)
@@ -741,18 +747,55 @@ function next_dialogue()
 end
 
 -- add opening dialogue only once
-function handle_opening_dialogue()
- if not opening_done then
+optional_done={false,false,false,false,false}
+death_dialogues=0
+
+function optional_dialogue()
+ -- opening dialogue
+ if not optional_done[1] then
   if t()>1.5 then
-   txt={
-    "\"good morning,\n my little chicklet\" ♥",
-    "\"you can use ⬅️➡️⬆️⬇️ to     \nhave fun in the garden\"",
-    "\"but whatever you do...\"",
-    "\"do not cross the road!\"",
-   }
-   add_dialogue(pos,txt)
-   opening_done=true
+   opening_dialogue()
+   optional_done[1]=true
   end
+ end
+
+ -- death dialogue
+ if deaths>death_dialogues then
+  if pos==-2 and deaths>0 then
+   death_dialogue()
+   death_dialogues=deaths
+  end
+ end
+end
+
+function opening_dialogue()
+ txt1={
+  "\"good morning,\n my little chicklet\" ♥",
+  "\"you can use ⬅️➡️⬆️⬇️ to     \nhave fun in the garden\"",
+  "\"but whatever you do...\"",
+  "\"do not cross the road!\"",
+ }
+ add_dialogue(txt1)
+end
+
+function death_dialogue()
+ local txt2=nil
+ if deaths==1 then
+  txt2={
+   "\"my poor little chicklet\"",
+   "\"why did you not heed my warning?\"",
+   "\"please stay in the garden this time\"",
+  }
+ elseif deaths>=2 then
+  txt2={
+   "\"hello\""
+  }
+ else
+  txt2=nil
+ end
+
+ if txt2!=nil then
+  add_dialogue(txt2)
  end
 end
 -->8
