@@ -58,23 +58,7 @@ function _update()
  player_movement()
  update_pos()
 
- for i=1,#spawners do
-  sp=spawners[i]
-  if t()-sp.t >= sp.r then
-   // spawn obj
-   x=-8
-   if sp.s<0 then x=136 end
-   if sp.ty=="car" then
-    add(cars,{x=x, y=sp.y, s=sp.s})
-   elseif sp.ty=="log" then
-    w=flr(rnd(2))+2
-    if sp.s>0 then x-=w*8 end
-    add(logs,{x=x, y=sp.y, s=sp.s,w=w})
-   end
-   sp.t+=sp.r //reset spawn timer
-  end
- end
-
+ update_spawners()
  update_cars()
  update_logs()
 
@@ -351,6 +335,24 @@ function check_death()
   lb={x=l.x,y=l.y,w=l.w*8,h=8}
   if aabb_overlap(pb,lb) then
    dead=false
+  end
+ end
+end
+
+function update_spawners()
+ for sp in all(spawners) do
+  if t()-sp.t >= sp.r then
+   // spawn obj
+   x=-8
+   if sp.s<0 then x=136 end
+   if sp.ty=="car" then
+    add(cars,{x=x, y=sp.y, s=sp.s})
+   elseif sp.ty=="log" then
+    w=flr(rnd(2))+2
+    if sp.s>0 then x-=w*8 end
+    add(logs,{x=x, y=sp.y, s=sp.s,w=w})
+   end
+   sp.t+=sp.r //reset spawn timer
   end
  end
 end
