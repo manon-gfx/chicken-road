@@ -54,7 +54,6 @@ end
 function _update()
  if dialoguemode then
   next_dialogue()
-  sfx_voice_update()
  elseif not dead then
   player_movement()
  end
@@ -516,7 +515,12 @@ end
 function draw_dialogue()
  txt=get_dialogue()
  if #txt>0 then
-  dialoguemode=true
+  if not dialoguemode then
+   dialogue_t0=t()
+   dialoguemode=true
+  end
+
+  dialogue_dt=#(txt[1])/32
 
   camera(0,0)
   cls(0)
@@ -535,10 +539,16 @@ function draw_dialogue()
   sspr(120,16,8,8,bl+24,bb-32,16,16)
   sspr(112,24,8,8,bl+8,bb-16,16,16)
 
-  if not wascons then
-   sspr(120,24,8,8,bl+24,bb-16,16,16)
+  if t()-dialogue_t0 < dialogue_dt then
+   sfx_voice_update()
+
+   if wascons then
+    sspr(120,24,8,8,bl+24,bb-16,16,16)
+   else
+    sspr(104,24,8,8,bl+24,bb-16,16,16)
+   end
   else
-   sspr(104,24,8,8,bl+24,bb-16,16,16)
+   sspr(120,24,8,8,bl+24,bb-16,16,16)
   end
 
   lines=split(txt[1],"\n")
@@ -566,9 +576,7 @@ function next_dialogue()
     or btnup() or btndown()
     or btno() or btnx() then
    del_dialogue()
-   if #get_dialogue()==0 then
-    dialoguemode=false
-   end
+   dialoguemode=false
   end
  end
 end
