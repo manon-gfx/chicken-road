@@ -535,7 +535,7 @@ function draw_dialogue()
   sspr(120,16,8,8,bl+24,bb-32,16,16)
   sspr(112,24,8,8,bl+8,bb-16,16,16)
 
-  if flr(t()*8)%2==0 then
+  if not wascons then
    sspr(120,24,8,8,bl+24,bb-16,16,16)
   else
    sspr(104,24,8,8,bl+24,bb-16,16,16)
