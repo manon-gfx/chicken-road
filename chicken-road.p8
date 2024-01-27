@@ -130,6 +130,14 @@ function _draw()
   spr(sp,px,py-1,1,1,pd==0)
  end
 
+ //draw mama chicken
+ if flr(t()*1.8)%2==0 then
+  sspr(96,16,16,14,80,-24)
+ else
+  sspr(96,16,16,14,80,-23)
+ end
+ sspr(96,30,16,2,80,-10)
+
  draw_cars()
  draw_dialogue()
 
