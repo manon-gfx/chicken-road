@@ -26,6 +26,7 @@ function _init()
  dead=false
  cars={}
  logs={}
+ prints={}
 
  // spawn spawners
  spawners={}
@@ -165,6 +166,12 @@ function _draw()
  palt(0,true)
  palt(15,false)
 
+ if #prints>0 then
+  camera(0,0)
+  for i=1,#prints do
+   print(prints[i])
+  end
+ end
 end
 
 -->8
