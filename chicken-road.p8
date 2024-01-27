@@ -264,7 +264,7 @@ function update_camera()
  diff=campos-oldcampos
  smoothpos=oldcampos+fac*diff
 
- camera(0,smoothpos)
+ camera(0,smoothpos+0.5)
 
  oldcampos=smoothpos
 end
