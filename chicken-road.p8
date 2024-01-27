@@ -558,15 +558,16 @@ function draw_dialogue()
    dialoguemode=true
   end
 
-  dialogue_dt=#(txt[1])/32
+  dialogue_dt=t()-dialogue_t0
 
-  camera(0,0)
-  cls(0)
   local bl=8
   local bt=32
   local br=128-bl-1
   local bb=128-bt-1
 
+  camera(0,0)
+--  cls(0)
+  rectfill(bl-1,bt-1,br+1,bb+1,0)
   rect(bl,bt,br,bb,7)
   spr(15,bl-2,bt-2,1,1,true,false)
   spr(15,br-5,bt-2,1,1,false,false)
@@ -577,7 +578,8 @@ function draw_dialogue()
   sspr(120,16,8,8,bl+24,bb-32,16,16)
   sspr(112,24,8,8,bl+8,bb-16,16,16)
 
-  if t()-dialogue_t0 < dialogue_dt then
+  dialogue_len=#(txt[1])/32
+  if dialogue_dt < dialogue_len then
    sfx_voice_update()
 
    if wascons then
