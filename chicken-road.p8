@@ -75,50 +75,8 @@ function _update()
   end
  end
 
- i=#cars
- while i>0 do
-  c=cars[i];
-  c.x += c.s
-
-  // delete out of bounds cars
-  if (c.s>0 and c.x>136) or
-     (c.s<0 and c.x<-8) then
-   deli(cars, i)
-  end
-
-  i-=1
- end
-
- i=#logs
- while i>0 do
-  l=logs[i];
-  l.x += l.s
-
-  pb={x=px,y=py,w=8,h=8}
-  lb={x=l.x+2,y=l.y,w=l.w*8-4,h=8}
-  if aabb_overlap(pb,lb) then
-   px=(px-l.x+4)\8*8+l.x
-
-   px=max(px,l.x)
-   px=min(px,l.x+l.w*8-8)
-
-   if l.pcol != true then
-    add(swirls, {x=l.x+2,y=l.y,s=-0.5,t=t()})
-    add(swirls, {x=l.x+l.w*8,y=l.y,s=0.5,t=t()})
-   end
-   l.pcol=true
-  else
-   l.pcol=false
-  end
-
-  // delete out of bounds logs
-  if (l.s>0 and l.x>128) or
-     (l.s<0 and l.x+l.w*8<0) then
-   deli(logs, i)
-  end
-
-  i-=1
- end
+ update_cars()
+ update_logs()
 
  -- check if death occurs
  check_death()
@@ -394,6 +352,55 @@ function check_death()
   if aabb_overlap(pb,lb) then
    dead=false
   end
+ end
+end
+
+function update_cars()
+ i=#cars
+ while i>0 do
+  c=cars[i];
+  c.x += c.s
+
+  // delete out of bounds cars
+  if (c.s>0 and c.x>136) or
+     (c.s<0 and c.x<-8) then
+   deli(cars, i)
+  end
+
+  i-=1
+ end
+end
+
+function update_logs()
+ i=#logs
+ while i>0 do
+  l=logs[i];
+  l.x += l.s
+
+  pb={x=px,y=py,w=8,h=8}
+  lb={x=l.x+2,y=l.y,w=l.w*8-4,h=8}
+  if aabb_overlap(pb,lb) then
+   px=(px-l.x+4)\8*8+l.x
+
+   px=max(px,l.x)
+   px=min(px,l.x+l.w*8-8)
+
+   if l.pcol != true then
+    add(swirls, {x=l.x+2,y=l.y,s=-0.5,t=t()})
+    add(swirls, {x=l.x+l.w*8,y=l.y,s=0.5,t=t()})
+   end
+   l.pcol=true
+  else
+   l.pcol=false
+  end
+
+  // delete out of bounds logs
+  if (l.s>0 and l.x>128) or
+     (l.s<0 and l.x+l.w*8<0) then
+   deli(logs, i)
+  end
+
+  i-=1
  end
 end
 -->8
