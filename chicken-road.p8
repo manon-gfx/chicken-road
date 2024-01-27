@@ -28,6 +28,8 @@ function _init()
  logs={}
  prints={}
 
+ init_cumheights()
+
  // spawn spawners
  spawners={}
  add(spawners,{y=-96,s=0.8,r=2.5,t=t(),ty="car"})
@@ -226,7 +228,15 @@ end
 -->8
 viewheight=16 --sprites
 lvlheights={36,16} -- sprites
-cumheights={36,40} -- sprites
+cumheights={} -- sprites
+
+function init_cumheights()
+ cum=0
+ for i=1,#lvlheights do
+  cum+=lvlheights[i]
+  add(cumheights,cum)
+ end
+end
 
 function update_pos()
  pos=py\8
