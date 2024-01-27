@@ -24,6 +24,7 @@ function _init()
  pd=1
  level=1
  dead=false
+ dialoguemode=false
  cars={}
  logs={}
  pads={}
@@ -55,7 +56,11 @@ function _init()
 end
 
 function _update()
- player_movement()
+ if dialoguemode then
+  next_dialogue()
+ else
+  player_movement()
+ end
  update_pos()
 
  update_spawners()
@@ -144,11 +149,21 @@ function btndown()
  return btn(⬇️) and not wasdown
 end
 
+function btno()
+ return btn(🅾️) and not waso
+end
+
+function btnx()
+ return btn(❎) and not wasx
+end
+
 function wasbuttons()
  wasleft=btn(⬅️)
  wasright=btn(➡️)
  wasup=btn(⬆️)
  wasdown=btn(⬇️)
+ waso=btn(🅾️)
+ wasx=btn(x)
 end
 
 -->8
@@ -426,31 +441,60 @@ function get_dialogue()
  return {}
 end
 
+function del_dialogue()
+ for dial in all(dialogue) do
+  if pos==dial.pos then
+   deli(dial.txt,1)
+   tdialstart=nil
+  end
+ end
+end
+
 function draw_dialogue()
  txt=get_dialogue()
  if #txt>0 then
+  dialoguemode=true
+
   camera(0,0)
   cls(0)
-  local l=8
-  local t=32
-  local r=128-l-1
-  local b=128-t-1
+  local bl=8
+  local bt=32
+  local br=128-bl-1
+  local bb=128-bt-1
 
-  rect(l,t,r,b,7)
-  spr(15,l-2,t-2,1,1,true,false)
-  spr(15,r-5,t-2,1,1,false,false)
-  spr(15,l-2,b-5,1,1,true,true)
-  spr(15,r-5,b-5,1,1,false,true)
-  sspr(0,0,8,8,l+8,b-16,16,16)
+  rect(bl,bt,br,bb,7)
+  spr(15,bl-2,bt-2,1,1,true,false)
+  spr(15,br-5,bt-2,1,1,false,false)
+  spr(15,bl-2,bb-5,1,1,true,true)
+  spr(15,br-5,bb-5,1,1,false,true)
+  sspr(0,0,8,8,bl+8,bb-16,16,16)
 
   lines=split(txt[1],"\n")
 
-  local midh=(l+(r-l)/2)
-  local midv=(t+(b-t)/2)
-  for i,l in ipairs(lines) do
-   local tl=midv+8*(i-#lines/2)-5
+  if tdialstart==nil then
+   tdialstart=t()
+  end
+
+  local midh=(bl+(br-bl)/2)
+  local midv=(bt+(bb-bt)/2)
+  for j,l in ipairs(lines) do
+   local tl=midv+8*(j-#lines/2)-5
    local ll=midh-2*#l+1
    print(l,ll,tl,7)
+  end
+ end
+end
+
+function next_dialogue()
+ local tdiff=0.5
+ if t()-tdialstart>tdiff then
+  if btnleft() or btnright()
+    or btnup() or btndown()
+    or btno() or btnx() then
+   del_dialogue()
+   if #get_dialogue()==0 then
+    dialoguemode=false
+   end
   end
  end
 end
