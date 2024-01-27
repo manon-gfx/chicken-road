@@ -96,6 +96,9 @@ function _draw()
  draw_spawners()
  draw_swirls()
 
+ draw_logs()
+ draw_pads()
+
  if dead then
   if died_how=="splat" then
    spr(48,px,py-1)
@@ -105,9 +108,6 @@ function _draw()
    assert() // unkonwn reason
   end
  end
-
- draw_logs()
- draw_pads()
 
  //player
  if not dead then
