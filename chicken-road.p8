@@ -332,6 +332,12 @@ function spawn_car(sp,x)
  add(cars,{x=x, y=sp.y, s=sp.s,sp=sprite})
 end
 
+function spawn_log(sp,x)
+ w=flr(rnd(2))+2
+ if sp.s>0 then x-=w*8 end
+ add(logs,{x=x,y=sp.y,s=sp.s,w=w})
+end
+
 function prewarm_spawner(sp)
  step=abs(sp.s)*30*sp.r
  it=128/step
@@ -341,9 +347,7 @@ function prewarm_spawner(sp)
    if sp.ty=="car" then
     spawn_car(sp, ax)
    elseif sp.ty=="log" then
-    w=flr(rnd(2))+2
-    if sp.s>0 then ax-=w*8 end
-    add(logs,{x=ax,y=sp.y,s=sp.s,w=w})
+    spawn_log(sp,ax)
    end
  end
 end
@@ -357,9 +361,7 @@ function update_spawners()
    if sp.ty=="car" then
     spawn_car(sp, x)
    elseif sp.ty=="log" then
-    w=flr(rnd(2))+2
-    if sp.s>0 then x-=w*8 end
-    add(logs,{x=x, y=sp.y, s=sp.s,w=w})
+    spawn_log(sp,x)
    end
    sp.t+=sp.r //reset spawn timer
   end
