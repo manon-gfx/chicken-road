@@ -76,20 +76,9 @@ function _draw()
  palt(0,false)
  palt(15,true)
  draw_swirls()
+ draw_cars()
+ draw_logs()
 
- for i=1,#cars do
-  c=cars[i]
-  spr(2,c.x,c.y,1,1,c.s<0)
- end
- for l in all(logs) do
-  for i=1,l.w do
-   s=4
-   if i>1 and i<l.w then s=3 end
-   local sy = l.y
-   if l.pcol then sy+=1 end
-   spr(s,l.x+(i-1)*8,sy,1,1,i==1)
-  end
- end
  for p in all(pads) do
   spr(5,p.x,p.y)
  end
@@ -482,6 +471,24 @@ function draw_swirls()
   end
 
   i-=1
+ end
+end
+
+function draw_cars()
+ for c in all(cars) do
+  spr(2,c.x,c.y,1,1,c.s<0)
+ end
+end
+
+function draw_logs()
+ for l in all(logs) do
+  for i=1,l.w do
+   s=4
+   if i>1 and i<l.w then s=3 end
+   local sy = l.y
+   if l.pcol then sy+=1 end
+   spr(s,l.x+(i-1)*8,sy,1,1,i==1)
+  end
  end
 end
 __gfx__
