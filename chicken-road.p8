@@ -350,7 +350,7 @@ function check_death()
   if aabb_overlap(pb,cb) then
    dead=true
    died_how="splat"
-   sfx(32, 3)
+   sfx(32,3)
   end
  end
 
@@ -381,6 +381,7 @@ function check_death()
    died_how="drowned"
    spawn_swirls(px+1,px+7,py)
   end
+  sfx(32,3)
  end
 end
 
