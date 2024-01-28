@@ -11,26 +11,33 @@ end
 
 function init_lvl1()
  local base=0
+ spawn_pads(base+8,0b0000011111000000)
 
- car_spawner(base+11,-0.7,2.5)
- car_spawner(base+12,0.8,2.5)
+ car_spawner(base+12,-0.7,2.5)
+ car_spawner(base+13,0.8,2.5)
 
- car_spawner(base+17,0.8,3)
+ log_spawner(base+20,0.5,3.5)
 
- log_spawner(base+19,0.5,3.5)
+ log_spawner(base+25,-0.7,3.5)
+ spawn_pads(base+26,0b0011110000011000)
 
- car_spawner(base+21,0.8,3)
- car_spawner(base+22,1.0,2)
- car_spawner(base+24,-0.9,3)
- car_spawner(base+25,-1.2,2.5)
+ log_spawner(base+34,-1.0,2.5)
+ spawn_pads(base+35,0b0011001110001100)
+ log_spawner(base+36,1.2,3)
 
- log_spawner(base+27,-1.0,2.5)
- spawn_pads(base+28,0b0011000110001100)
- log_spawner(base+29,1.2,3)
+ car_spawner(base+38,1.5,1.1)
 
- car_spawner(base+31,-1.2,2)
- log_spawner(base+32,1.2,3)
- car_spawner(base+33,-1.5,2)
+ car_spawner(base+44,0.8,3)
+ car_spawner(base+45,-0.7,3)
+ log_spawner(base+46,0.8,3)
+
+ car_spawner(base+52,0.8,1.6)
+ car_spawner(base+53,1.0,1.8)
+
+ log_spawner(base+55,0.6,3.1)
+ spawn_pads(base+56,0b0111001111001110)
+ log_spawner(base+57,-0.7,2.9)
+ log_spawner(base+58,0.7,3)
 end
 
 function init_lvl2()
@@ -45,12 +52,12 @@ function init_lvl2()
  car_spawner(base+26,-1.2,2)
  car_spawner(base+27,-1.5,2.5)
 
- car_spawner(base+34,0.8,1.6)
- car_spawner(base+35,1.0,1.8)
- car_spawner(base+36,-1.0,1.8)
- car_spawner(base+37,-1.2,2.0)
+ car_spawner(base+34,0.8,2.0)
+ car_spawner(base+35,1.0,2.2)
+ car_spawner(base+36,-1.0,2.0)
+ car_spawner(base+37,-1.2,2.2)
 
- car_spawner(base+40,1.0,1.4)
+ car_spawner(base+40,1.0,1.8)
  car_spawner(base+41,1.5,1.6)
  car_spawner(base+42,-1.5,2.0)
  car_spawner(base+43,-1.8,2.2)
