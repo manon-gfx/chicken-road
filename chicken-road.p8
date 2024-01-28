@@ -1202,6 +1202,9 @@ function draw_logs()
     else
      s=23
     end
+    if l.w==1 then
+     s=19
+    end
    elseif l.ty=="clog" then
     if i==1 then
      s=6
