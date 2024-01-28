@@ -652,9 +652,10 @@ function player_movement()
 end
 
 function kill_player(reason)
- if reason=="splat" then
+ if reason=="splat" or reason=="fireball"
+   or reason=="penguin" or reason=="star" then
   sfx(35,3)
- elseif reason == "drowned" then
+ elseif reason=="drowned" or reason=="fall" then
   sfx(32,3)
  elseif reason == "lava" then
   sfx(36,3)
@@ -671,7 +672,17 @@ function check_death()
   pb={x=px+2,y=py,w=4,h=8}
   cb={x=c.x,y=c.y+4,w=8,h=3}
   if aabb_overlap(pb,cb) then
-   kill_player("splat")
+   sprite=c.sp
+   if sp==21 then
+    reason="penguin"
+   elseif sp==35 then
+    reason="star"
+   elseif sp==36 then
+    reason="fireball"
+   else
+    reason="splat"
+   end
+   kill_player(reason)
   end
  end
 
@@ -698,8 +709,10 @@ function check_death()
 
  if on_deadly then
   local reason=""
-  if cur_tile==66 or cur_tile==100 or cur_tile==70 then
+  if cur_tile==66 or cur_tile==100 then
    reason="drowned"
+  elseif cur_tile==70 then
+   reason="fall"
   elseif cur_tile==83 or cur_tile==99 then
    reason="lava"
   else
