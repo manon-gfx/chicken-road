@@ -944,13 +944,23 @@ dialogue={
  {pos=-258,txt={"\"start of sky\""}},
  {pos=-318,txt={"\"end of sky\""}},
  -- 294: back home
- {pos=-299,txt={
+ {pos=-300,txt={
   "\"oh, my little chicklet\"",
   "\"how happy i am\nto see you again!\"",
   "\"finally, back home safe\nand sound\"",
   "\"i now only have one\nquestion for you...\"",
   "\"why did my little\nchicklet cross the road?\"",
-  "\"<yes dialogue option>\""
+  "♥",
+  "\"what do you mean yes?\"",
+  "♥",
+  "\"can you say something\nother than yes?\"",
+  "♥",
+  "\"well let's hear it then!\"",
+  "♥",
+  "\"so you can\nonly say yes...\"",
+  "♥",
+  "\"promise me you will stay\nin the garden this time?\"",
+  "♥"
  }},
 }
 
@@ -1012,6 +1022,23 @@ function draw_dialogue()
   spr(15,bl-2,bb-5,1,1,true,true)
   spr(15,br-5,bb-5,1,1,false,true)
 
+  if tdialstart==nil then
+   tdialstart=t()
+  end
+
+  if txt[1]=="♥" then
+   sspr(flr(t()%2)*8,0,8,8,br-24,bb-17,16,16,true)
+   print("choose an option", bl+16, 40)
+   print("⬆️ yes",bl+16,50+sin(t()))
+   print("⬇️ yes",bl+16,56+sin(t()))
+   print("⬅️ yes",bl+16,62+sin(t()))
+   print("➡️ yes",bl+16,68+sin(t()))
+   print("❎ yes",bl+16,74+sin(t()))
+   print("🅾️ yes",bl+16,80+sin(t()))
+   return
+  end
+
+  // mama chicken
   sspr(112,16,8,8,bl+8,bb-32,16,16)
   sspr(120,16,8,8,bl+24,bb-32,16,16)
   sspr(112,24,8,8,bl+8,bb-16,16,16)
@@ -1030,10 +1057,6 @@ function draw_dialogue()
   end
 
   lines=split(txt[1],"\n")
-
-  if tdialstart==nil then
-   tdialstart=t()
-  end
 
   local midh=(bl+(br-bl)/2)
   local midv=(bt+(bb-bt)/2)-16
