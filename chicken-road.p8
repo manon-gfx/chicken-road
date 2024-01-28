@@ -18,6 +18,10 @@ function snow_spawner(l0,l1,s,r,b)
  b = b or true
  add(spawners,{y=l0*-8,y1=l1*-8,s=s,r=r,bothd=b,t=t(),ty="snow"})
 end
+function fire_spawner(l0,l1,s,r,b)
+ b=b or true
+ add(spawners,{y=l0*-8,y1=l1*-8,s=s,r=r,bothd=b,t=t(),ty="fire"})
+end
 
 function init_lvl1()
  local base=0
@@ -630,7 +634,7 @@ function spawn_peng(sp,x)
  end
 end
 
-function spawn_snow(sp,x)
+function spawn_ball(sp,x,sprite)
  local lns=abs(sp.y-sp.y1)\8
 
  local y=flr(rnd(lns))*8
@@ -653,7 +657,13 @@ function spawn_snow(sp,x)
  else
   x=136
  end
- add(cars,{x=x,y=y,s=spd,sp=20})
+ add(cars,{x=x,y=y,s=spd,sp=sprite})
+end
+function spawn_snow(sp,x)
+ spawn_ball(sp,x,20)
+end
+function spawn_fire(sp,x)
+ spawn_ball(sp,x,36)
 end
 
 function spawn_log(sp,x)
@@ -697,6 +707,8 @@ function update_spawners()
     spawn_peng(sp,x)
    elseif sp.ty=="snow" then
     spawn_snow(sp)
+   elseif sp.ty=="fire" then
+    spawn_fire(sp)
    elseif sp.ty=="log" then
     spawn_log(sp,x)
    elseif sp.ty=="llog" then
