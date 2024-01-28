@@ -10,12 +10,12 @@ function log_spawner(l,s,r,minw,maxw)
  maxw=maxw or 3
  add(spawners,{y=l*-8,s=s,r=r,minw=minw,maxw=maxw,t=t(),ty="log"})
 end
-function llog_spawner(l,s,r,fw)
+function llog_spawner(l,s,r,minw,maxw)
  minw=minw or 2
  maxw=maxw or 3
  add(spawners,{y=l*-8,s=s,r=r,minw=minw,maxw=maxw,t=t(),ty="llog"})
 end
-function clog_spawner(l,s,r,fw)
+function clog_spawner(l,s,r,minw,maxw)
  minw=minw or 2
  maxw=maxw or 3
  add(spawners,{y=l*-8,s=s,r=r,minw=minw,maxw=maxw,t=t(),ty="clog"})
