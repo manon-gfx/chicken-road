@@ -231,9 +231,15 @@ function _update()
   end
 
   if t()-died_t>1.5 then
+   lvl=get_lvl()
    bubbles={}
    px=64
-   py=-16
+   if lvl==1 then
+    py=-16
+   else
+    py=-16-8*cumheights[lvl-1]
+   end
+
    dead=false
    deaths+=1
    died_t=0
