@@ -25,7 +25,7 @@ function init_lvl1()
  car_spawner(base+25,-1.2,2.5)
 
  log_spawner(base+27,-1.0,2.5)
- spawn_pads(-28*8,0x318c)
+ spawn_pads(base+28,0b0011000110001100)
  log_spawner(base+29,1.2,3)
 
  car_spawner(base+31,-1.2,2)
@@ -210,7 +210,6 @@ function _draw()
 
  draw_cars()
  draw_dialogue()
-
 
  camera(0,0)
  for i=1,#prints do
@@ -485,6 +484,7 @@ function check_death()
 end
 
 function spawn_pads(y,mask)
+ y*=-8
  for i=0,15 do
   if band(lshr(mask,15-i),1)==1 then
    add(pads, {x=i*8,y=y})
