@@ -109,6 +109,25 @@ end
 function init_lvl4()
  local base=cumheights[3]
 
+ llog_spawner(base+7,0.7,5)
+
+ llog_spawner(base+9,-0.6,4.2)
+
+ llog_spawner(base+15,1.7,3)
+
+ llog_spawner(base+18,0.7,2)
+ llog_spawner(base+19,-1.6,2)
+
+ llog_spawner(base+28,1.4,2)
+ llog_spawner(base+29,-0.5,4)
+ llog_spawner(base+30,1.6,1.7)
+
+ llog_spawner(base+35,-1.7,3)
+
+ llog_spawner(base+39,-1.5,3)
+ llog_spawner(base+40,0.6,3.2)
+ llog_spawner(base+41,-1.0,2)
+ llog_spawner(base+42,1.4,2.4)
 
 end
 
