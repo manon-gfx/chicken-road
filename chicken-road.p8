@@ -81,7 +81,20 @@ end
 
 function init_lvl3()
  local base=cumheights[2]
- peng_spawner(base+15,2.0,1.0)
+
+ peng_spawner(base+15,-1.5,1.6)
+
+ peng_spawner(base+22,2.0,1.3)
+
+ peng_spawner(base+32,1.7,1.5)
+ peng_spawner(base+33,-2.0,1.3)
+ peng_spawner(base+38,2.7,2.0)
+
+ peng_spawner(base+48,1.6,1.6)
+ peng_spawner(base+49,-2.1,1.2)
+ peng_spawner(base+53,-1.2,2.2)
+ peng_spawner(base+55,1.6,1.6)
+ peng_spawner(base+56,-2.1,1.5)
 
 -- snow_spawner(base+5,base+10,3.0,0.5)
 end
