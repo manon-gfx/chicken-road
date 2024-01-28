@@ -743,7 +743,7 @@ dialogue={
  }},
  {pos=-80,txt={
   "\"a concrete jungle where\ndreams are made of...\"",
-  "\"does not make gramatical\nsense to me\""
+  "\"does not make grammatical\nsense to me\"",
  }},
  {pos=-97,txt={
   "\"fine, i give up...\"",
@@ -755,9 +755,8 @@ dialogue={
   "\"that was\nreverse psychology!\"",
   "\"you're not supposed\nto listen!\"",
  }},
- {pos=-126,txt={"\"end of city\""}},
  -- 128: ice starts
- {pos=-130,txt={"\"start of ice\""}},
+ {pos=-130,txt={"\"todo\""}},
  {pos=-148,txt={
   "\"at least make sure\nto wear a scarf\"",
   "\"otherwise, you'll\ncatch a cold\"",
@@ -765,16 +764,22 @@ dialogue={
  {pos=-170,txt={
   "\"don't make eye contact!\"",
   "\"those penguins have\na real mean look\"",
-  "\"given the change, they\nwill waddle all over you\""
+  "\"given the chance, they\nwill waddle all over you\""
  }},
- {pos=-190,txt={"\"end of ice\""}},
  -- 192: lava starts
  {pos=-194,txt={
   "\"i know i warned you\nnot to catch a cold...\"",
   "\"but descending to the\nninth circle of hell...\"",
   "\"is also not what\ni had in mind\"",
  }},
- {pos=-254,txt={"\"end of lava\""}},
+ {pos=-214,txt={
+  "\"how are you even able to\nstand on those rocks?\"",
+  "\"i did not know chickens\nhave heat-resistant feet\"",
+ }},
+ {pos=-234,txt={
+  "\"this is getting\nridiculous!\"",
+  "\"my little chicklet\nhaving to dodge\nliteral balls of fire\"",
+ }},
  -- 256: sky starts
  {pos=-258,txt={"\"start of sky\""}},
  {pos=-318,txt={"\"end of sky\""}},
