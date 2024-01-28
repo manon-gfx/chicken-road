@@ -773,19 +773,25 @@ end
 -->8
 -- all dialogue stuff
 dialogue={
- {pos=-11,txt={"\"please, be careful,\n my little chicklet!\""}},
- {pos=-14,txt={"\"why would you\n cross the road?\"","\"what could possibly\n be worth such dangers?\""}},
+ {pos=-11,txt={
+  "\"please, be careful,\n my little chicklet!\""
+  }},
+ {pos=-14,txt={
+  "\"why would you\n cross the road?\"",
+  "\"what could possibly\n be worth such dangers?\""
+  }},
  {pos=-62,txt={
   "\"pfew, you managed\nto get across...\"",
   "\"finally, the end\nof my worries\"",
  }},
  -- 64: city starts
  {pos=-66,txt={
-  "\"todo\""
+  "\"gosh darn it.\"",
+  "\"i didn't expect there to \nbe worlds beyond our own\"",
  }},
  {pos=-80,txt={
   "\"a concrete jungle where\ndreams are made of...\"",
-  "\"does not make grammatical\nsense to me\"",
+  "\"that does not make\ngrammatical sense to me\"",
  }},
  {pos=-97,txt={
   "\"fine, i give up...\"",
@@ -795,15 +801,18 @@ dialogue={
  {pos=-102,txt={
   "\"no!\"",
   "\"that was\nreverse psychology!\"",
-  "\"you're not supposed\nto listen!\"",
+  "\"you wasn't supposed\nto listen!\"",
  }},
  -- 128: ice starts
- {pos=-130,txt={"\"todo\""}},
- {pos=-148,txt={
+ {pos=-130,txt={
+  "\"what is this?\"",
+  "\"how did you end up in\nthis frigid wilderness?\""
+ }},
+ {pos=-147,txt={
   "\"at least make sure\nto wear a scarf\"",
   "\"otherwise, you'll\ncatch a cold\"",
  }},
- {pos=-170,txt={
+ {pos=-172,txt={
   "\"don't make eye contact!\"",
   "\"those penguins have\na real mean look\"",
   "\"given the chance, they\nwill waddle all over you\""
