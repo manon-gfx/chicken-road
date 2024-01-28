@@ -401,26 +401,24 @@ function player_movement()
  if btnleft() then
   dx-=8
   pd=0
-  sfx(31, 3)
  end
 
  if btnright() then
   dx+=8
   pd=1
-  sfx(31, 3)
  end
 
  if btnup() then
   dy-=8
   pd=2
-  sfx(31, 3)
  end
 
  if btndown() then
   dy+=8
   pd=3
-  sfx(31, 3)
  end
+
+ snd=31
 
  // player tilemap collsion
  local targx=px+dx
@@ -428,20 +426,43 @@ function player_movement()
  local samplex=targx
  local sampley=targy
 
+ local oldmaxv=max(
+  abs(vx),abs(vy))
+
+ local wasonice=false
+ if mget2(px+4,py+4)==84 then
+  wasonice=true
+  dx/=4
+  dy/=4
+  targx=px+dx
+  targy=py+dy
+ end
+
  // ice
+ local onice=false
  if mget2(targx+4,targy+4) == 84 then
+  onice=true
   if dx!=0 then
-   vx=dx/8
-   dx/=4
+   if not wasonice then dx/=2 end
+   vx=sgn(dx)
   end
   if dy!=0 then
-   vy=dy/8
-   dy/=4
+   if not wasonice then dy/=2 end
+   vy=sgn(dy)
   end
  else
   vx=0
   vy=0
  end
+
+ if dx!=0 or dy!=0 then
+  local maxv=max(abs(vx),abs(vy))
+  if maxv>0.1 and oldmaxv < 0.2 then
+   snd=37
+  end
+  sfx(snd, 3)
+ end
+
  dx += vx
  dy += vy
  vx-=0.1*vx
