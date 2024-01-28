@@ -184,6 +184,7 @@ function _init()
  level=1
  dead=false
  deaths=0
+ death_dialogues=0
  died_how=""
  died_t=0
  dialoguemode=false
@@ -1109,7 +1110,14 @@ function optional_dialogue()
  end
 
  -- death dialogue
- if pos==-2 and deaths>0 then
+ lvl=get_lvl()
+ if lvl==1 then
+  respawn_pos=-2
+ else
+  respawn_pos=-2-cumheights[lvl-1]
+ end
+
+ if pos==respawn_pos then
   if deaths>death_dialogues then
    death_dialogue()
    death_dialogues=deaths
@@ -1138,7 +1146,9 @@ function death_dialogue()
   new_death=false
  end
 
- if deaths==1 then
+ lvl=get_lvl()
+
+ if deaths==1 and lvl==1 then
   txt={
    "\"my poor little chicklet\"",
    "\"why did you not\nheed my warning?\"",
@@ -1155,6 +1165,16 @@ function death_dialogue()
     "\"just because you look\na bit like a duckling...\"",
     "\"does not mean you can\nswim like one!\""
    }
+  elseif died_how=="lava" then
+   txt={
+    "\"i never thought i would see my little chicklet drown in lava\""
+   }
+  elseif died_how=="peng" then
+   txt={
+    "\"darn flightless birds!\""
+   }
+  else
+
   end
  elseif deaths>=2 then
   txt={
