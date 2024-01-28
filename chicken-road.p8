@@ -15,6 +15,11 @@ function llog_spawner(l,s,r,fw)
  maxw=maxw or 3
  add(spawners,{y=l*-8,s=s,r=r,minw=minw,maxw=maxw,t=t(),ty="llog"})
 end
+function clog_spawner(l,s,r,fw)
+ minw=minw or 2
+ maxw=maxw or 3
+ add(spawners,{y=l*-8,s=s,r=r,minw=minw,maxw=maxw,t=t(),ty="clog"})
+end
 function peng_spawner(l,s,r)
  add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="peng"})
 end
@@ -689,17 +694,20 @@ function spawn_fire(sp,x)
  spawn_ball(sp,x,36)
 end
 
-function spawn_log(sp,x)
+function spawn_gen_log(sp,x,ty)
  local w=sp.minw
  w += flr(rnd(sp.maxw-sp.minw+1))
  if sp.s>0 then x-=w*8 end
- add(logs,{x=x,y=sp.y,s=sp.s,w=w,ty="log"})
+ add(logs,{x=x,y=sp.y,s=sp.s,w=w,ty=ty})
+end
+function spawn_log(sp,x)
+ spawn_gen_log(sp,x,"log")
 end
 function spawn_llog(sp,x)
- local w=sp.minw
- w += flr(rnd(sp.maxw-sp.minw+1))
- if sp.s>0 then x-=w*8 end
- add(logs,{x=x,y=sp.y,s=sp.s,w=w,ty="llog"})
+ spawn_gen_log(sp,x,"llog")
+end
+function spawn_clog(sp,x)
+ spawn_gen_log(sp,x,"clog")
 end
 
 function prewarm_spawner(sp)
@@ -716,6 +724,8 @@ function prewarm_spawner(sp)
     spawn_log(sp,ax)
    elseif sp.ty=="llog" then
     spawn_llog(sp,ax)
+   elseif sp.ty=="clog" then
+    spawn_clog(sp,ax)
    end
  end
 end
@@ -738,6 +748,8 @@ function update_spawners()
     spawn_log(sp,x)
    elseif sp.ty=="llog" then
     spawn_llog(sp,x)
+   elseif sp.ty=="clog" then
+    spawn_clog(sp,x)
    end
    sp.t+=sp.r //reset spawn timer
   end
@@ -1182,6 +1194,14 @@ function draw_logs()
      s=24
     else
      s=23
+    end
+   elseif l.ty=="clog" then
+    if i==1 then
+     s=6
+    elseif i==l.w then
+     s=8
+    else
+     s=7
     end
    else
     assert(false, "can't  draw this log type.")
