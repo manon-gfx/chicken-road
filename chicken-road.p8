@@ -246,6 +246,7 @@ function _update()
  px=max(0,px)
  px=min(120,px)
  py=min(bottom_level_bound,py)
+ py=max(cumheights[6]*-8,py)
 
  update_pos()
 
