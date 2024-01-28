@@ -8,6 +8,9 @@ end
 function log_spawner(l,s,r)
  add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="log"})
 end
+function llog_spawner(l,s,r)
+ add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="llog"})
+end
 function peng_spawner(l,s,r)
  add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="peng"})
 end
@@ -640,7 +643,12 @@ end
 function spawn_log(sp,x)
  w=flr(rnd(2))+2
  if sp.s>0 then x-=w*8 end
- add(logs,{x=x,y=sp.y,s=sp.s,w=w})
+ add(logs,{x=x,y=sp.y,s=sp.s,w=w,ty="log"})
+end
+function spawn_llog(sp,x)
+ w=flr(rnd(2))+2
+ if sp.s>0 then x-=w*8 end
+ add(logs,{x=x,y=sp.y,s=sp.s,w=w,ty="llog"})
 end
 
 function prewarm_spawner(sp)
@@ -655,6 +663,8 @@ function prewarm_spawner(sp)
     spawn_peng(sp,ax)
    elseif sp.ty=="log" then
     spawn_log(sp,ax)
+   elseif sp.ty=="llog" then
+    spawn_llog(sp,ax)
    end
  end
 end
@@ -673,6 +683,8 @@ function update_spawners()
     spawn_snow(sp)
    elseif sp.ty=="log" then
     spawn_log(sp,x)
+   elseif sp.ty=="llog" then
+    spawn_llog(sp,x)
    end
    sp.t+=sp.r //reset spawn timer
   end
@@ -1033,6 +1045,11 @@ function draw_spawners()
    for i=-1,15 do
     spr(66,i*8+offset,s.y)
    end
+  elseif s.ty=="llog" then
+   local offset=(t()*s.s*30)%8
+   for i=-1,15 do
+    spr(83,i*8+offset,s.y)
+   end
   end
  end
 end
@@ -1099,11 +1116,26 @@ end
 function draw_logs()
  for l in all(logs) do
   for i=1,l.w do
-   s=4
-   if i>1 and i<l.w then s=3 end
+   local flipx=false
+   local s=nil
+   if l.ty=="log" then
+    s=4
+    if i==1 then flipx=true end
+    if i>1 and i<l.w then s=3 end
+   elseif l.ty=="llog" then
+    if i==1 then
+     s=22
+    elseif i==l.w then
+     s=24
+    else
+     s=23
+    end
+   else
+    assert(false, "can't  draw this log type.")
+   end
    local sy = l.y
    if l.pcol then sy+=1 end
-   spr(s,l.x+(i-1)*8,sy,1,1,i==1)
+   spr(s,l.x+(i-1)*8,sy,1,1,flipx)
   end
  end
 end
