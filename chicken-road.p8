@@ -86,6 +86,12 @@ function init_lvl3()
 -- snow_spawner(base+5,base+10,3.0,0.5)
 end
 
+function init_lvl4()
+ local base=cumheights[3]
+
+
+end
+
 function _init()
  print("♥")
  px=64
@@ -122,6 +128,8 @@ function _init()
  init_lvl1()
  init_lvl2()
  init_lvl3()
+ init_lvl4()
+
  // prewarm spawners
  for s in all(spawners) do
   prewarm_spawner(s)
