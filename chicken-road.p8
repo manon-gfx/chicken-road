@@ -640,8 +640,8 @@ end
 -->8
 -- all dialogue stuff
 dialogue={
- {pos=-8,txt={"\"please, be careful,\n my little chicklet!\""}},
- {pos=-15,txt={"\"why would you\n cross the road?\"","\"what could possibly\n be worth such dangers?\""}},
+ {pos=-10,txt={"\"please, be careful,\n my little chicklet!\""}},
+ {pos=-13,txt={"\"why would you\n cross the road?\"","\"what could possibly\n be worth such dangers?\""}},
 }
 
 -- gets dialogue for current pos
@@ -790,12 +790,16 @@ function death_dialogue()
  if deaths==1 then
   txt2={
    "\"my poor little chicklet\"",
-   "\"why did you not heed my warning?\"",
-   "\"please stay in the garden this time\"",
+   "\"why did you not\nheed my warning?\"",
+   "\"please stay in the\ngarden this time\"",
   }
- elseif deaths>=2 then
+ elseif deaths==2 then
   txt2={
-   "\"hello\""
+   "\"you really are quite\nstubborn, aren't you?\"",
+  }
+ elseif deaths==3 then
+  txt2={
+   "\"hello\"",
   }
  else
   txt2=nil
