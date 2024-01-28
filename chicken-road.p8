@@ -954,7 +954,7 @@ dialogue={
  {pos=-258,txt={"\"start of sky\""}},
  {pos=-318,txt={"\"end of sky\""}},
  -- 294: back home
- {pos=-300,txt={
+ {pos=-303,txt={
   "\"oh, my little chicklet\"",
   "\"how happy i am\nto see you again!\"",
   "\"finally, back home safe\nand sound\"",
@@ -1318,13 +1318,13 @@ end
 function draw_mama()
  if flr(t()*1.8)%2==0 then
   sspr(96,16,16,14,80,-8*3)
-  sspr(96,16,16,14,80,-8*301)
+  sspr(96,16,16,14,80,-8*305)
  else
   sspr(96,16,16,14,80,-8*3+1)
-  sspr(96,16,16,14,80,-8*301+1)
+  sspr(96,16,16,14,80,-8*305+1)
  end
  sspr(96,30,16,2,80,-8*3+14)
- sspr(96,30,16,2,80,-8*301+14)
+ sspr(96,30,16,2,80,-8*305+14)
 end
 -->8
 -- dialogue voice
