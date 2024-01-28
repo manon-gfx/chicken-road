@@ -76,6 +76,8 @@ function _init()
  print("♥")
  px=64
  py=-16
+ vx=0
+ vy=0
  pd=1
  level=1
  dead=false
@@ -405,11 +407,36 @@ function player_movement()
  local samplex=targx
  local sampley=targy
 
+ // ice
+ if mget2(targx+4,targy+4) == 84 then
+  if dx!=0 then
+   vx=dx/8
+   dx/=4
+  end
+  if dy!=0 then
+   vy=dy/8
+   dy/=4
+  end
+ else
+  vx=0
+  vy=0
+ end
+ dx += vx
+ dy += vy
+ vx-=0.1*vx
+ vy-=0.1*vy
+ targx=px+dx
+ targy=py+dy
+
+ if abs(vx)<0.1 then vx=0 end
+ if abs(vy)<0.1 then vy=0 end
+
  if dx!=0 then
   if dx>0 then samplex+=7 end
   c0=fget(mget2(samplex,py),0)
   c1=fget(mget2(samplex,py+7),0)
   if c0 or c1 then
+   vx=0
    if dx>0 then
     targx=(samplex-8)\8*8
    else
@@ -423,6 +450,7 @@ function player_movement()
   c0=fget(mget2(targx,sampley),0)
   c1=fget(mget2(targx+7,sampley),0)
   if c0 or c1 then
+   vy=0
    if dy>0 then
     targy=(sampley-8)\8*8
    else
