@@ -590,7 +590,7 @@ function check_death()
   end
  end
 
- local cur_tile=mget2(px,py)
+ local cur_tile=mget2(px+4,py+7)
  local on_deadly=fget(cur_tile,1)
 
  -- test if on log
@@ -613,9 +613,9 @@ function check_death()
 
  if on_deadly then
   local reason=""
-  if cur_tile==66 then
+  if cur_tile==66 or cur_tile==100 then
    reason="drowned"
-  elseif cur_tile==83 then
+  elseif cur_tile==83 or cur_tile==99 then
    reason="lava"
   else
    assert() //unknown reason
