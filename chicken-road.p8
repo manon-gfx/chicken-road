@@ -8,6 +8,9 @@ end
 function log_spawner(l,s,r)
  add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="log"})
 end
+function peng_spawner(l,s,r)
+ add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="peng"})
+end
 
 function init_lvl1()
  local base=0
@@ -72,6 +75,11 @@ function init_lvl2()
  car_spawner(base+53,-4.0,3.0)
 end
 
+function init_lvl3()
+ local base=cumheights[2]
+ peng_spawner(base+15,2.0,1.0)
+end
+
 function _init()
  print("♥")
  px=64
@@ -107,6 +115,7 @@ function _init()
  spawners={}
  init_lvl1()
  init_lvl2()
+ init_lvl3()
  // prewarm spawners
  for s in all(spawners) do
   prewarm_spawner(s)
@@ -482,7 +491,7 @@ function check_death()
  -- car collision
  for c in all(cars) do
   pb={x=px+2,y=py,w=4,h=8}
-  cb={x=c.x,y=c.y,w=8,h=8}
+  cb={x=c.x,y=c.y+4,w=8,h=3}
   if aabb_overlap(pb,cb) then
    kill_player("splat")
   end
@@ -539,6 +548,14 @@ function spawn_car(sp,x)
  sprite=16*sprite+2
  add(cars,{x=x, y=sp.y, s=sp.s,sp=sprite})
 end
+function spawn_peng(sp,x)
+ local sprite=21
+ local cnt=flr(rnd(3))
+ local a=-sgn(sp.s)*8
+ for i=0,cnt do
+  add(cars,{x=x+a*i,y=sp.y,s=sp.s,sp=sprite})
+ end
+end
 
 function spawn_log(sp,x)
  w=flr(rnd(2))+2
@@ -554,6 +571,8 @@ function prewarm_spawner(sp)
    if sp.s<0 then ax=(136-ax) end
    if sp.ty=="car" then
     spawn_car(sp, ax)
+   elseif sp.ty=="peng" then
+    spawn_peng(sp,ax)
    elseif sp.ty=="log" then
     spawn_log(sp,ax)
    end
@@ -568,6 +587,8 @@ function update_spawners()
    if sp.s<0 then x=136 end
    if sp.ty=="car" then
     spawn_car(sp, x)
+   elseif sp.ty=="peng" then
+    spawn_peng(sp,x)
    elseif sp.ty=="log" then
     spawn_log(sp,x)
    end
@@ -1042,9 +1063,9 @@ fff99ffffff99fffffffffffffffffffffffffffff3333fff666666666666666666666ff00000000
 fffffffffff77fffffffffffffffffffffffffffffffffff000000000000000000000000000000000000000000000000000000000000000000000000777fffff
 fff77ffffff799fff00ff00ff444444ffccc77ffffffffff0000000000000000000000000000000000000000000000000000000000000000000000007799999f
 fff799fffff78fffcccccccc44444944c777cc7fffffffff00000000000000000000000000000000000000000000000000000000000000000000000079999999
-fff78fffff7777ffcccccc77449444441c7777c7f01111ff0000000000000000000000000000000000000000000000000000000000000000000000007999ffff
-ff7777fff777777fcccccc77444444441cccccc7991ddd99000000000000000000000000000000000000000000000000000000000000000000000000789999ff
-f777777fff7777ffcccccccc444449441ccc1116f177777900000000000000000000000000000000000000000000000000000000000000000000000078899fff
+fff78fffff7777ffcccccc77449444441c7777c7ff11110f0000000000000000000000000000000000000000000000000000000000000000000000007999ffff
+ff7777fff777777fcccccc77444444441cccccc799ddd199000000000000000000000000000000000000000000000000000000000000000000000000789999ff
+f777777fff7777ffcccccccc444449441ccc11169777771f00000000000000000000000000000000000000000000000000000000000000000000000078899fff
 ff7777ffff9ff9fff00ff00f94444449f111666fffffffff0000000000000000000000000000000000000000000000000000000000000000000000007888ffff
 ff9ff9ffff9ff9fffffffffff999999fffffffffffffffff0000000000000000000000000000000000000000000000000000000000000000000000006778ffff
 fffffffffff77fffffffffffffffffffffffffff00000000000000000000000000000000000000000000000000000000fff888ffffffffffffffff888fffffff
