@@ -696,10 +696,8 @@ function spawn_log(sp,x)
  add(logs,{x=x,y=sp.y,s=sp.s,w=w,ty="log"})
 end
 function spawn_llog(sp,x)
- local w=sp.fw
- if w==0 then
-  w=flr(rnd(2))+2
- end
+ local w=sp.minw
+ w += flr(rnd(sp.maxw-sp.minw+1))
  if sp.s>0 then x-=w*8 end
  add(logs,{x=x,y=sp.y,s=sp.s,w=w,ty="llog"})
 end
