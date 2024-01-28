@@ -816,7 +816,7 @@ function death_dialogue()
     "\"does not mean you can\nswim like one!\""
    }
   end
- elseif deaths==2 then
+ elseif deaths>=2 then
   txt={
    "\"you really are quite\nstubborn, aren't you?\"",
   }
