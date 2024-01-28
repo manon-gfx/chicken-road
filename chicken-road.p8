@@ -672,6 +672,28 @@ end
 dialogue={
  {pos=-11,txt={"\"please, be careful,\n my little chicklet!\""}},
  {pos=-14,txt={"\"why would you\n cross the road?\"","\"what could possibly\n be worth such dangers?\""}},
+ {pos=-62,txt={"\"todo\""}},
+ -- 64: city starts
+ {pos=-66,txt={
+  "\"look at you,\nout in the big city\"",
+  "\"\""
+ }},
+ {pos=-80,txt={
+  "\"a concrete jungle where\ndreams are made of...\"",
+  "\"does not seem\ngramatically correct to me\""
+ }},
+ {pos=-126,txt={"\"end of city\""}},
+ -- 128: ice starts
+ {pos=-130,txt={"\"start of ice\""}},
+ {pos=-190,txt={"\"end of ice\""}},
+ -- 192: lava starts
+ {pos=-194,txt={"\"start of lava\""}},
+ {pos=-254,txt={"\"end of lava\""}},
+ -- 256: sky starts
+ {pos=-258,txt={"\"start of sky\""}},
+ {pos=-318,txt={"\"end of sky\""}
+ -- 320: back home
+ {pos=-322,txt={"\"back home\""}
 }
 
 -- gets dialogue for current pos
