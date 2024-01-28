@@ -710,23 +710,37 @@ dialogue={
  }},
  {pos=-80,txt={
   "\"a concrete jungle where\ndreams are made of...\"",
-  "\"does not seem\ngramatically correct to me\""
+  "\"does not make gramatical\nsense to me\""
  }},
- {pos=-100,txt={
+ {pos=-97,txt={
   "\"fine, i give up...\"",
-  "\"go ahead and cross that road too\""
+  "\"go ahead and cross\nthat road too\"",
+  "\"seems like a\nsafe thing to do\""
  }},
- {pos=-104,txt={
+ {pos=-102,txt={
   "\"no!\"",
   "\"that was\nreverse psychology!\"",
-  "\"i did not expect\nyou to listen\"",
+  "\"you're not supposed\nto listen!\"",
  }},
  {pos=-126,txt={"\"end of city\""}},
  -- 128: ice starts
  {pos=-130,txt={"\"start of ice\""}},
+ {pos=-148,txt={
+  "\"at least make sure\nto wear a scarf\"",
+  "\"otherwise, you'll\ncatch a cold\"",
+ }},
+ {pos=-170,txt={
+  "\"don't make eye contact!\"",
+  "\"those penguins have\na real mean look\"",
+  "\"given the change, they\nwill waddle all over you\""
+ }},
  {pos=-190,txt={"\"end of ice\""}},
  -- 192: lava starts
- {pos=-194,txt={"\"start of lava\""}},
+ {pos=-194,txt={
+  "\"i know i warned you\nnot to catch a cold...\"",
+  "\"but descending to the\nninth circle of hell...\"",
+  "\"is also not what\ni had in mind\"",
+ }},
  {pos=-254,txt={"\"end of lava\""}},
  -- 256: sky starts
  {pos=-258,txt={"\"start of sky\""}},
