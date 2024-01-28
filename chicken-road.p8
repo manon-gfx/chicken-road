@@ -102,14 +102,20 @@ end
 function init_lvl3()
  local base=cumheights[2]
 
+ snow_spawner(base+10,base+12,2,2.5,false)
+
  peng_spawner(base+15,-1.5,1.6)
 
  peng_spawner(base+22,2.0,1.3)
 
+ snow_spawner(base+25,base+28,-2.2,1.6)
+
  peng_spawner(base+32,1.7,1.5)
  peng_spawner(base+33,-2.0,1.3)
+ snow_spawner(base+35,base+40,-2.5,1.0)
  peng_spawner(base+38,2.7,2.0)
 
+ snow_spawner(base+45,base+60,-2.2,0.8)
  peng_spawner(base+48,1.6,1.6)
  peng_spawner(base+49,-2.1,1.2)
  peng_spawner(base+53,-1.2,2.2)
@@ -126,21 +132,39 @@ function init_lvl4()
 
  llog_spawner(base+9,-0.6,4.2)
 
+ fire_spawner(base+10,base+14,-1.2,1.3)
+
  llog_spawner(base+15,1.7,3)
 
  llog_spawner(base+18,0.7,2)
  llog_spawner(base+19,-1.6,2)
 
+ fire_spawner(base+23,base+27,-1.2,1.3)
+
  llog_spawner(base+28,1.4,2)
  llog_spawner(base+29,-0.5,4)
  llog_spawner(base+30,1.6,1.7)
 
+ fire_spawner(base+31,base+33,-1.2,1.5)
+
  llog_spawner(base+35,-1.7,3)
 
+ fire_spawner(base+38,base+42,-1.0,2.2)
  llog_spawner(base+39,-1.5,3)
  llog_spawner(base+40,0.6,3.2)
  llog_spawner(base+41,-1.0,2)
  llog_spawner(base+42,1.4,2.4)
+
+ llog_spawner(base+49,-1.4,1.4)
+ llog_spawner(base+50,1.1,2.2)
+ llog_spawner(base+51,-1.5,1.8)
+ llog_spawner(base+52,-0.6,2)
+ fire_spawner(base+49,base+58,-1.0,2.5)
+ llog_spawner(base+54,1.3,2.4)
+ llog_spawner(base+55,0.8,1.8)
+ llog_spawner(base+56,-1.8,1.5)
+ llog_spawner(base+57,0.8,2.6)
+ llog_spawner(base+58,-1.6,1.2)
 
 end
 
