@@ -172,6 +172,9 @@ function init_lvl5()
 
  clog_spawner(base+4,2.0,1.0)
 
+
+ // house
+ spawn_pads(base+54,0b0000011111000000)
 end
 
 function _init()
