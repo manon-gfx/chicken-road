@@ -402,7 +402,7 @@ end
 -- all map and camera stuff --
 
 viewheight=16
-lvlheights={64,64,64,64,64,64}
+lvlheights={64,64,64,64,64,16,1}
 cumheights={}
 
 function init_cumheights()
