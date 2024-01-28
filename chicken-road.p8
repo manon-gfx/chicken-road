@@ -813,10 +813,10 @@ end
 -->8
 -- all dialogue stuff
 dialogue={
- {pos=-11,txt={
+ {pos=-10,txt={
   "\"please, be careful,\n my little chicklet!\""
   }},
- {pos=-14,txt={
+ {pos=-15,txt={
   "\"why would you\n cross the road?\"",
   "\"what could possibly\n be worth such dangers?\""
   }},
@@ -867,7 +867,7 @@ dialogue={
   "\"how are you even able to\nstand on those rocks?\"",
   "\"i did not know chickens\nhave heat-resistant feet\"",
  }},
- {pos=-234,txt={
+ {pos=-236,txt={
   "\"this is getting\nridiculous!\"",
   "\"my little chicklet\nhaving to dodge\nliteral balls of fire\"",
  }},
