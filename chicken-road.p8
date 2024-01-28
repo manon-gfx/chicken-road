@@ -672,15 +672,26 @@ end
 dialogue={
  {pos=-11,txt={"\"please, be careful,\n my little chicklet!\""}},
  {pos=-14,txt={"\"why would you\n cross the road?\"","\"what could possibly\n be worth such dangers?\""}},
- {pos=-62,txt={"\"todo\""}},
+ {pos=-62,txt={
+  "\"pfew, you managed\nto get across...\"",
+  "\"finally, the end\nof my worries\"",
+ }},
  -- 64: city starts
  {pos=-66,txt={
-  "\"look at you,\nout in the big city\"",
-  "\"\""
+  "\"todo\""
  }},
  {pos=-80,txt={
   "\"a concrete jungle where\ndreams are made of...\"",
   "\"does not seem\ngramatically correct to me\""
+ }},
+ {pos=-100,txt={
+  "\"fine, i give up...\"",
+  "\"go ahead and cross that road too\""
+ }},
+ {pos=-104,txt={
+  "\"no!\"",
+  "\"that was\nreverse psychology!\"",
+  "\"i did not expect\nyou to listen\"",
  }},
  {pos=-126,txt={"\"end of city\""}},
  -- 128: ice starts
@@ -691,9 +702,9 @@ dialogue={
  {pos=-254,txt={"\"end of lava\""}},
  -- 256: sky starts
  {pos=-258,txt={"\"start of sky\""}},
- {pos=-318,txt={"\"end of sky\""}
+ {pos=-318,txt={"\"end of sky\""}},
  -- 320: back home
- {pos=-322,txt={"\"back home\""}
+ {pos=-322,txt={"\"back home\""}},
 }
 
 -- gets dialogue for current pos
