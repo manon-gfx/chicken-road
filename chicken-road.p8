@@ -11,6 +11,10 @@ end
 function peng_spawner(l,s,r)
  add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="peng"})
 end
+function snow_spawner(l0,l1,s,r,b)
+ b = b or true
+ add(spawners,{y=l0*-8,y1=l1*-8,s=s,r=r,bothd=b,t=t(),ty="snow"})
+end
 
 function init_lvl1()
  local base=0
@@ -78,6 +82,8 @@ end
 function init_lvl3()
  local base=cumheights[2]
  peng_spawner(base+15,2.0,1.0)
+
+-- snow_spawner(base+5,base+10,3.0,0.5)
 end
 
 function _init()
@@ -563,6 +569,31 @@ function spawn_peng(sp,x)
   add(cars,{x=x+a*i,y=sp.y,s=sp.s,sp=sprite})
  end
 end
+function spawn_snow(sp,x)
+ local lns=abs(sp.y-sp.y1)\8
+
+ local y=flr(rnd(lns))*8
+ local lim=0
+ while y==sp.lasty and lim<8 do
+  y=flr(rnd(lns))*8
+  lim+=1
+ end
+ sp.lasty=y
+
+ y+=min(sp.y,sp.y1)
+
+ local spd=sp.s
+ if sp.bothd and flr(rnd(2))==0 then
+  spd=-spd
+ end
+
+ if spd>=0 then
+  x=-8
+ else
+  x=136
+ end
+ add(cars,{x=x,y=y,s=spd,sp=20})
+end
 
 function spawn_log(sp,x)
  w=flr(rnd(2))+2
@@ -596,6 +627,8 @@ function update_spawners()
     spawn_car(sp, x)
    elseif sp.ty=="peng" then
     spawn_peng(sp,x)
+   elseif sp.ty=="snow" then
+    spawn_snow(sp)
    elseif sp.ty=="log" then
     spawn_log(sp,x)
    end
