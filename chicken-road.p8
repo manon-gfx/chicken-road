@@ -24,11 +24,11 @@ function peng_spawner(l,s,r)
  add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="peng"})
 end
 function snow_spawner(l0,l1,s,r,b)
- b = b or true
+ if b==nil then b=true end
  add(spawners,{y=l0*-8,y1=l1*-8,s=s,r=r,bothd=b,t=t(),ty="snow"})
 end
 function fire_spawner(l0,l1,s,r,b)
- b=b or true
+ if b==nil then b=true end
  add(spawners,{y=l0*-8,y1=l1*-8,s=s,r=r,bothd=b,t=t(),ty="fire"})
 end
 
