@@ -870,12 +870,12 @@ dialogue={
   "\"a concrete jungle where\ndreams are made of...\"",
   "\"that does not make\ngrammatical sense to me\"",
  }},
- {pos=-97,txt={
+ {pos=-96,txt={
   "\"fine, i give up...\"",
   "\"go ahead and cross\nthat road too\"",
   "\"seems like a\nsafe thing to do\""
  }},
- {pos=-102,txt={
+ {pos=-103,txt={
   "\"no!\"",
   "\"that was\nreverse psychology!\"",
   "\"you wasn't supposed\nto listen!\"",
@@ -911,8 +911,15 @@ dialogue={
  -- 256: sky starts
  {pos=-258,txt={"\"start of sky\""}},
  {pos=-318,txt={"\"end of sky\""}},
- -- 320: back home
- {pos=-322,txt={"\"back home\""}},
+ -- 294: back home
+ {pos=-300,txt={
+  "\"oh, my little chicklet\"",
+  "\"how happy i am\nto see you again!\"",
+  "\"finally, back home safe\nand sound\"",
+  "\"i now only have one\nquestion for you...\"",
+  "\"why did my little\nchicklet cross the road?\"",
+  "\"<yes dialogue option>\""
+ }},
 }
 
 -- gets dialogue for current pos
