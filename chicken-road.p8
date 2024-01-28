@@ -31,6 +31,10 @@ function fire_spawner(l0,l1,s,r,b)
  if b==nil then b=true end
  add(spawners,{y=l0*-8,y1=l1*-8,s=s,r=r,bothd=b,t=t(),ty="fire"})
 end
+function star_spawner(l0,l1,s,r,b)
+ if b==nil then b=true end
+ add(spawners,{y=l0*-8,y1=l1*-8,s=s,r=r,bothd=b,t=t(),ty="star"})
+end
 
 function init_lvl1()
  local base=0
@@ -693,6 +697,9 @@ end
 function spawn_fire(sp,x)
  spawn_ball(sp,x,36)
 end
+function spawn_star(sp,x)
+ spawn_ball(sp,x,35)
+end
 
 function spawn_gen_log(sp,x,ty)
  local w=sp.minw
@@ -744,6 +751,8 @@ function update_spawners()
     spawn_snow(sp)
    elseif sp.ty=="fire" then
     spawn_fire(sp)
+   elseif sp.ty=="star" then
+    spawn_star(sp)
    elseif sp.ty=="log" then
     spawn_log(sp,x)
    elseif sp.ty=="llog" then
