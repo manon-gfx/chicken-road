@@ -296,7 +296,8 @@ function _update()
  if dead then
   -- spawn bubbles if drowned
   if died_how=="drowned" or
-     died_how=="lava" then
+     died_how=="lava" or
+     died_how=="fall" then
    if t()-bubble_time > 0.3 then
     bubble_time=t()
     add(bubbles,{x=rnd(8),y=7-rnd(6),t=t(),lava=died_how=="lava"})
@@ -347,12 +348,16 @@ function _draw()
  draw_pads()
 
  if dead then
-  if died_how=="splat" then
+  if died_how=="splat" or died_how=="penguin" then
    spr(48,px,py-1)
   elseif died_how=="drowned" then
    draw_bubbles()
   elseif died_how=="lava" then
    draw_bubbles()
+  elseif died_how=="fall" then
+   draw_bubbles()
+  elseif died_how=="star" or died_how=="fireball" then
+
   else
    assert() // unkonwn reason
   end
@@ -673,11 +678,11 @@ function check_death()
   cb={x=c.x,y=c.y+4,w=8,h=3}
   if aabb_overlap(pb,cb) then
    sprite=c.sp
-   if sp==21 then
+   if sprite==21 then
     reason="penguin"
-   elseif sp==35 then
+   elseif sprite==35 then
     reason="star"
-   elseif sp==36 then
+   elseif sprite==36 then
     reason="fireball"
    else
     reason="splat"
@@ -1201,6 +1206,18 @@ function death_dialogue()
  elseif died_how=="drowned" and not death_types[2] then
   new_death=true
   death_types[2]=true
+ elseif died_how=="penguin" and not death_types[3] then
+  new_death=true
+  death_types[3]=true
+ elseif died_how=="star" and not death_types[4] then
+  new_death=true
+  death_types[4]=true
+ elseif died_how=="fireball" and not death_types[5] then
+  new_death=true
+  death_types[5]=true
+ elseif died_how=="fall" and not death_types[6] then
+  new_death=true
+  death_types[6]=true
  else
   new_death=false
  end
@@ -1228,9 +1245,27 @@ function death_dialogue()
    txt={
     "\"i never thought i would see my little chicklet drown in lava\""
    }
-  elseif died_how=="peng" then
+  elseif died_how=="penguin" then
    txt={
     "\"darn flightless birds!\""
+   }
+  elseif died_how=="fall" then
+   txt={
+    "\"such a long way down\""
+   }
+  elseif died_how=="fireball" then
+   txt={
+    "\"ouch, that has\ngot to hurt!\""
+   }
+  elseif died_how=="star" then
+   txt={
+    "\"they say if you\nshoot for the moon...\"",
+    "\"you may land\namong the stars\"",
+    "\"but they never\nmention getting hit\nin the face by one\""
+   }
+  elseif died_how=="ice" then
+   txt={
+    "\"what a cold surprise\""
    }
   else
 
