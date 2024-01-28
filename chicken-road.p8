@@ -100,6 +100,9 @@ function _init()
  init_cumheights()
  init_voice()
 
+ // spawn ahead
+-- py=cumheights[2]*-8-16
+
  // spawn spawners
  spawners={}
  init_lvl1()
