@@ -155,7 +155,6 @@ function _update()
    py=-16
    dead=false
    deaths+=1
-   died_how=""
    died_t=0
   end
  end
@@ -640,8 +639,8 @@ end
 -->8
 -- all dialogue stuff
 dialogue={
- {pos=-10,txt={"\"please, be careful,\n my little chicklet!\""}},
- {pos=-13,txt={"\"why would you\n cross the road?\"","\"what could possibly\n be worth such dangers?\""}},
+ {pos=-11,txt={"\"please, be careful,\n my little chicklet!\""}},
+ {pos=-14,txt={"\"why would you\n cross the road?\"","\"what could possibly\n be worth such dangers?\""}},
 }
 
 -- gets dialogue for current pos
@@ -755,6 +754,9 @@ end
 
 -- add opening dialogue only once
 optional_done={false,false,false,false,false}
+
+-- splat,drown,...
+death_types={false,false,false,false}
 death_dialogues=0
 
 function optional_dialogue()
@@ -767,8 +769,8 @@ function optional_dialogue()
  end
 
  -- death dialogue
- if deaths>death_dialogues then
-  if pos==-2 and deaths>0 then
+ if pos==-2 and deaths>0 then
+  if deaths>death_dialogues then
    death_dialogue()
    death_dialogues=deaths
   end
@@ -776,37 +778,54 @@ function optional_dialogue()
 end
 
 function opening_dialogue()
- txt1={
+ txt={
   "\"good morning,\n my little chicklet\" ♥",
   "\"you can use ⬅️➡️⬆️⬇️ to     \nhave fun in the garden\"",
   "\"but whatever you do...\"",
   "\"do not cross the road!\"",
  }
- add_dialogue(txt1)
+ add_dialogue(txt)
 end
 
 function death_dialogue()
- local txt2=nil
+ if died_how=="splat" and not death_types[1] then
+  new_death=true
+  death_types[1]=true
+ elseif died_how=="drowned" and not death_types[2] then
+  new_death=true
+  death_types[2]=true
+ else
+  new_death=false
+ end
+
  if deaths==1 then
-  txt2={
+  txt={
    "\"my poor little chicklet\"",
    "\"why did you not\nheed my warning?\"",
    "\"please stay in the\ngarden this time\"",
   }
+ elseif new_death then
+  if died_how=="splat" then
+   txt={
+    "\"hit by a car...\"",
+    "\"what a dumb way to die\""
+   }
+  elseif died_how=="drowned" then
+   txt={
+    "\"just because you look\na bit like a duckling...\"",
+    "\"does not mean you can\nswim like one!\""
+   }
+  end
  elseif deaths==2 then
-  txt2={
+  txt={
    "\"you really are quite\nstubborn, aren't you?\"",
   }
- elseif deaths==3 then
-  txt2={
-   "\"hello\"",
-  }
  else
-  txt2=nil
+  txt=nil
  end
 
- if txt2!=nil then
-  add_dialogue(txt2)
+ if txt!=nil then
+  add_dialogue(txt)
  end
 end
 -->8
