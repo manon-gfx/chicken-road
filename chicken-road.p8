@@ -5,11 +5,15 @@ __lua__
 function car_spawner(l,s,r)
  add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="car"})
 end
-function log_spawner(l,s,r)
- add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="log"})
+function log_spawner(l,s,r,minw,maxw)
+ minw=minw or 2
+ maxw=maxw or 3
+ add(spawners,{y=l*-8,s=s,r=r,minw=minw,maxw=maxw,t=t(),ty="log"})
 end
-function llog_spawner(l,s,r)
- add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="llog"})
+function llog_spawner(l,s,r,fw)
+ minw=minw or 2
+ maxw=maxw or 3
+ add(spawners,{y=l*-8,s=s,r=r,minw=minw,maxw=maxw,t=t(),ty="llog"})
 end
 function peng_spawner(l,s,r)
  add(spawners,{y=l*-8,s=s,r=r,t=t(),ty="peng"})
@@ -686,12 +690,16 @@ function spawn_fire(sp,x)
 end
 
 function spawn_log(sp,x)
- w=flr(rnd(2))+2
+ local w=sp.minw
+ w += flr(rnd(sp.maxw-sp.minw+1))
  if sp.s>0 then x-=w*8 end
  add(logs,{x=x,y=sp.y,s=sp.s,w=w,ty="log"})
 end
 function spawn_llog(sp,x)
- w=flr(rnd(2))+2
+ local w=sp.fw
+ if w==0 then
+  w=flr(rnd(2))+2
+ end
  if sp.s>0 then x-=w*8 end
  add(logs,{x=x,y=sp.y,s=sp.s,w=w,ty="llog"})
 end
