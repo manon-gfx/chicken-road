@@ -525,6 +525,20 @@ function player_movement()
   end
  end
 
+ local sptl=mget2(targx+1,targy+1)
+ local sptr=mget2(targx+7,targy+1)
+ local spbl=mget2(targx+1,targy+7)
+ local spbr=mget2(targx+7,targy+7)
+
+ -- snap player to grid
+ if (sptl==sptr) and (sptl==spbl)
+   and (sptl==spbr) then
+  if fget(sptl,2) then
+   targx=(targx+4)\8*8
+   targy=(targy+4)\8*8
+  end
+ end
+
  px=targx
  py=targy
 end
@@ -606,6 +620,7 @@ function spawn_car(sp,x)
  sprite=16*sprite+2
  add(cars,{x=x, y=sp.y, s=sp.s,sp=sprite})
 end
+
 function spawn_peng(sp,x)
  local sprite=21
  local cnt=flr(rnd(3))
@@ -614,6 +629,7 @@ function spawn_peng(sp,x)
   add(cars,{x=x+a*i,y=sp.y,s=sp.s,sp=sprite})
  end
 end
+
 function spawn_snow(sp,x)
  local lns=abs(sp.y-sp.y1)\8
 
