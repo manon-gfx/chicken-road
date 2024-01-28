@@ -988,8 +988,8 @@ dialogue={
   "\"my little chicklet\nhaving to dodge\nliteral balls of fire\"",
  }},
  -- 256: sky starts
- {pos=-258,txt={"\"start of sky\""}},
- {pos=-318,txt={"\"end of sky\""}},
+ {pos=-258,txt={"\"be careful not to clouds are n\""}},
+ {pos=-280,txt={"\"i never knew that `shooting\nstars' was meant literally\""}},
  -- 294: back home
  {pos=-303,txt={
   "\"oh, my little chicklet\"",
@@ -1216,7 +1216,7 @@ function death_dialogue()
   else
 
   end
- elseif deaths>=2 then
+ elseif deaths==2 then
   txt={
    "\"you really are quite\nstubborn, aren't you?\"",
   }
