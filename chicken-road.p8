@@ -118,7 +118,7 @@ function init_lvl3()
  snow_spawner(base+45,base+47,-1.5,1.6)
  peng_spawner(base+48,1.4,2.0)
  peng_spawner(base+49,-1.6,1.7)
- 
+
  snow_spawner(base+52,base+59,-1.5,1.5)
  peng_spawner(base+53,-1.2,2.2)
  peng_spawner(base+55,1.4,1.9)
@@ -1132,7 +1132,7 @@ function next_dialogue()
   if btnleft() or btnright()
     or btnup() or btndown()
     or btno() or btnx() then
-  	sfx(38,1)
+   sfx(38,1)
    del_dialogue()
    dialoguemode=false
   end
