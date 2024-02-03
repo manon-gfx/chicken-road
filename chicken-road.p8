@@ -296,7 +296,8 @@ function _update()
  if dead then
   -- spawn bubbles if drowned
   if died_how=="drowned" or
-     died_how=="lava" then
+     died_how=="lava" or
+     died_how=="fall" then
    if t()-bubble_time > 0.3 then
     bubble_time=t()
     add(bubbles,{x=rnd(8),y=7-rnd(6),t=t(),lava=died_how=="lava"})
@@ -347,12 +348,16 @@ function _draw()
  draw_pads()
 
  if dead then
-  if died_how=="splat" then
+  if died_how=="splat" or died_how=="penguin" then
    spr(48,px,py-1)
   elseif died_how=="drowned" then
    draw_bubbles()
   elseif died_how=="lava" then
    draw_bubbles()
+  elseif died_how=="fall" then
+   draw_bubbles()
+  elseif died_how=="ice" or died_how=="fireball" or died_how=="star" then
+   spr(48,px,py-1)
   else
    assert() // unkonwn reason
   end
@@ -441,7 +446,7 @@ end
 -- all map and camera stuff --
 
 viewheight=16
-lvlheights={64,64,64,64,64,16,1}
+lvlheights={64,64,64,64,64,24,1}
 cumheights={}
 
 function init_cumheights()
@@ -652,9 +657,10 @@ function player_movement()
 end
 
 function kill_player(reason)
- if reason=="splat" then
+ if reason=="splat" or reason=="ice" or reason=="penguin"
+   or reason=="fireball" or reason=="star" then
   sfx(35,3)
- elseif reason == "drowned" then
+ elseif reason=="drowned" or reason=="fall" then
   sfx(32,3)
  elseif reason == "lava" then
   sfx(36,3)
@@ -671,7 +677,19 @@ function check_death()
   pb={x=px+2,y=py,w=4,h=8}
   cb={x=c.x,y=c.y+4,w=8,h=3}
   if aabb_overlap(pb,cb) then
-   kill_player("splat")
+   sprite=c.sp
+   if sprite==20 then
+    reason="ice"
+   elseif sprite==21 then
+    reason="penguin"
+   elseif sprite==35 then
+    reason="star"
+   elseif sprite==36 then
+    reason="fireball"
+   else
+    reason="splat"
+   end
+   kill_player(reason)
   end
  end
 
@@ -698,8 +716,10 @@ function check_death()
 
  if on_deadly then
   local reason=""
-  if cur_tile==66 or cur_tile==100 or cur_tile==70 then
+  if cur_tile==37 or cur_tile==66 or cur_tile==100 then
    reason="drowned"
+  elseif cur_tile==70 then
+   reason="fall"
   elseif cur_tile==83 or cur_tile==99 then
    reason="lava"
   else
@@ -959,7 +979,7 @@ dialogue={
  {pos=-103,txt={
   "\"no!\"",
   "\"that was\nreverse psychology!\"",
-  "\"you wasn't supposed\nto listen!\"",
+  "\"you weren't supposed\nto listen!\"",
  }},
  -- 128: ice starts
  {pos=-130,txt={
@@ -994,7 +1014,7 @@ dialogue={
   "\"please be careful,\nmy little chicklet!",
   "\"and don't look down!\""
  }},
- {pos=-281,txt={"\"i never knew that `shooting\nstars' was meant literally\""}},
+ {pos=-281,txt={"\"i never knew\nthat `shooting stars'\nwas meant literally\""}},
  -- 294: back home
  {pos=-303,txt={
   "\"oh, my little chicklet\"",
@@ -1013,6 +1033,19 @@ dialogue={
   "♥",
   "\"promise me you will stay\nin the garden this time?\"",
   "♥"
+ }},
+ {pos=-310,txt={
+  "\"but...\nyou promised...\"",
+ }},
+ {pos=-316,txt={
+  "\"stop!\"",
+  "\"the developers did not\neven finish that part\nof the map!\""
+ }},
+ {pos=-324,txt={
+  "\"you weren't meant\nto go here\"",
+  "\"i tried to warn you!\"",
+  "\"there is no way back now\"",
+  "\"i hope you're\nhappy with yourself\"",
  }},
 }
 
@@ -1143,7 +1176,7 @@ end
 optional_done={false,false,false,false,false}
 
 -- splat,drown,...
-death_types={false,false,false,false}
+death_types={false,false,false,false,false,false,false,false}
 death_dialogues=0
 
 function optional_dialogue()
@@ -1188,6 +1221,24 @@ function death_dialogue()
  elseif died_how=="drowned" and not death_types[2] then
   new_death=true
   death_types[2]=true
+ elseif died_how=="penguin" and not death_types[3] then
+  new_death=true
+  death_types[3]=true
+ elseif died_how=="ice" and not death_types[4] then
+  new_death=true
+  death_types[4]=true
+ elseif died_how=="lava" and not death_types[5] then
+  new_death=true
+  death_types[5]=true
+ elseif died_how=="fireball" and not death_types[6] then
+  new_death=true
+  death_types[6]=true
+ elseif died_how=="star" and not death_types[7] then
+  new_death=true
+  death_types[7]=true
+ elseif died_how=="fall" and not death_types[8] then
+  new_death=true
+  death_types[8]=true
  else
   new_death=false
  end
@@ -1211,13 +1262,31 @@ function death_dialogue()
     "\"just because you look\na bit like a duckling...\"",
     "\"does not mean you can\nswim like one!\""
    }
-  elseif died_how=="lava" then
-   txt={
-    "\"i never thought i would see my little chicklet drown in lava\""
-   }
-  elseif died_how=="peng" then
+  elseif died_how=="penguin" then
    txt={
     "\"darn flightless birds!\""
+   }
+  elseif died_how=="ice" then
+   txt={
+    "\"what a cold surprise\""
+   }
+  elseif died_how=="lava" then
+   txt={
+    "\"i never thought i\nwould see my little\nchicklet drown in lava\""
+   }
+  elseif died_how=="fireball" then
+   txt={
+    "\"ouch, that has\ngot to hurt!\""
+   }
+  elseif died_how=="star" then
+   txt={
+    "\"they say if you\nshoot for the moon...\"",
+    "\"you may land\namong the stars\"",
+    "\"but they never\nmention getting hit\nin the face by one\""
+   }
+  elseif died_how=="fall" then
+   txt={
+    "\"such a long way down\""
    }
   else
 
