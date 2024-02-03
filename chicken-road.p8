@@ -1161,7 +1161,7 @@ end
 optional_done={false,false,false,false,false}
 
 -- splat,drown,...
-death_types={false,false,false,false}
+death_types={false,false,false,false,false,false,false,false}
 death_dialogues=0
 
 function optional_dialogue()
@@ -1209,15 +1209,21 @@ function death_dialogue()
  elseif died_how=="penguin" and not death_types[3] then
   new_death=true
   death_types[3]=true
- elseif died_how=="star" and not death_types[4] then
+ elseif died_how=="ice" and not death_types[4] then
   new_death=true
   death_types[4]=true
- elseif died_how=="fireball" and not death_types[5] then
+ elseif died_how=="lava" and not death_types[5] then
   new_death=true
   death_types[5]=true
- elseif died_how=="fall" and not death_types[6] then
+ elseif died_how=="fireball" and not death_types[6] then
   new_death=true
   death_types[6]=true
+ elseif died_how=="star" and not death_types[7] then
+  new_death=true
+  death_types[7]=true
+ elseif died_how=="fall" and not death_types[8] then
+  new_death=true
+  death_types[8]=true
  else
   new_death=false
  end
@@ -1241,17 +1247,17 @@ function death_dialogue()
     "\"just because you look\na bit like a duckling...\"",
     "\"does not mean you can\nswim like one!\""
    }
-  elseif died_how=="lava" then
-   txt={
-    "\"i never thought i would see my little chicklet drown in lava\""
-   }
   elseif died_how=="penguin" then
    txt={
     "\"darn flightless birds!\""
    }
-  elseif died_how=="fall" then
+  elseif died_how=="ice" then
    txt={
-    "\"such a long way down\""
+    "\"what a cold surprise\""
+   }
+  elseif died_how=="lava" then
+   txt={
+    "\"i never thought i would see my little chicklet drown in lava\""
    }
   elseif died_how=="fireball" then
    txt={
@@ -1263,9 +1269,9 @@ function death_dialogue()
     "\"you may land\namong the stars\"",
     "\"but they never\nmention getting hit\nin the face by one\""
    }
-  elseif died_how=="ice" then
+  elseif died_how=="fall" then
    txt={
-    "\"what a cold surprise\""
+    "\"such a long way down\""
    }
   else
 
