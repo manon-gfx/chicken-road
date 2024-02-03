@@ -979,7 +979,7 @@ dialogue={
  {pos=-103,txt={
   "\"no!\"",
   "\"that was\nreverse psychology!\"",
-  "\"you wasn't supposed\nto listen!\"",
+  "\"you weren't supposed\nto listen!\"",
  }},
  -- 128: ice starts
  {pos=-130,txt={
@@ -1014,7 +1014,7 @@ dialogue={
   "\"please be careful,\nmy little chicklet!",
   "\"and don't look down!\""
  }},
- {pos=-281,txt={"\"i never knew that `shooting\nstars' was meant literally\""}},
+ {pos=-281,txt={"\"i never knew\nthat `shooting stars'\nwas meant literally\""}},
  -- 294: back home
  {pos=-303,txt={
   "\"oh, my little chicklet\"",
@@ -1033,6 +1033,10 @@ dialogue={
   "♥",
   "\"promise me you will stay\nin the garden this time?\"",
   "♥"
+ }},
+ {pos=-316,txt={
+  "\"stop!\"",
+  "\"the developers did not\neven finish that part\nof the map!\""
  }},
 }
 
@@ -1259,7 +1263,7 @@ function death_dialogue()
    }
   elseif died_how=="lava" then
    txt={
-    "\"i never thought i would see my little chicklet drown in lava\""
+    "\"i never thought i\nwould see my little\nchicklet drown in lava\""
    }
   elseif died_how=="fireball" then
    txt={
