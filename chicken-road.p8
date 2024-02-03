@@ -446,7 +446,7 @@ end
 -- all map and camera stuff --
 
 viewheight=16
-lvlheights={64,64,64,64,64,16,1}
+lvlheights={64,64,64,64,64,24,1}
 cumheights={}
 
 function init_cumheights()
@@ -716,7 +716,7 @@ function check_death()
 
  if on_deadly then
   local reason=""
-  if cur_tile==66 or cur_tile==100 then
+  if cur_tile==37 or cur_tile==66 or cur_tile==100 then
    reason="drowned"
   elseif cur_tile==70 then
    reason="fall"
@@ -1034,9 +1034,18 @@ dialogue={
   "\"promise me you will stay\nin the garden this time?\"",
   "♥"
  }},
+ {pos=-310,txt={
+  "\"but...\nyou promised...\"",
+ }},
  {pos=-316,txt={
   "\"stop!\"",
   "\"the developers did not\neven finish that part\nof the map!\""
+ }},
+ {pos=-324,txt={
+  "\"you weren't meant\nto go here\"",
+  "\"i tried to warn you!\"",
+  "\"there is no way back now\"",
+  "\"i hope you're\nhappy with yourself\"",
  }},
 }
 
