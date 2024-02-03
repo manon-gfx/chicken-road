@@ -356,8 +356,8 @@ function _draw()
    draw_bubbles()
   elseif died_how=="fall" then
    draw_bubbles()
-  elseif died_how=="star" or died_how=="fireball" then
-
+  elseif died_how=="ice" or died_how=="fireball" or died_how=="star" then
+   spr(48,px,py-1)
   else
    assert() // unkonwn reason
   end
@@ -657,8 +657,8 @@ function player_movement()
 end
 
 function kill_player(reason)
- if reason=="splat" or reason=="fireball"
-   or reason=="penguin" or reason=="star" then
+ if reason=="splat" or reason=="ice" or reason=="penguin"
+   or reason=="fireball" or reason=="star" then
   sfx(35,3)
  elseif reason=="drowned" or reason=="fall" then
   sfx(32,3)
@@ -678,7 +678,9 @@ function check_death()
   cb={x=c.x,y=c.y+4,w=8,h=3}
   if aabb_overlap(pb,cb) then
    sprite=c.sp
-   if sprite==21 then
+   if sprite==20 then
+    reason="ice"
+   elseif sprite==21 then
     reason="penguin"
    elseif sprite==35 then
     reason="star"
